@@ -1,0 +1,32 @@
+---
+import type { Project } from '../data/projects';
+import { withBase } from '../utils/paths';
+
+interface Props {
+  project: Project;
+  index: number;
+}
+
+const { project, index } = Astro.props;
+---
+
+<article class:list={['home-project', `home-project--${index + 1}`]} data-project data-reveal>
+  <a class="home-project__media" href={withBase(`/portfolio/${project.slug}/`)} aria-label={`View ${project.title}`}>
+    <img
+      src={withBase(project.coverImage)}
+      alt={`Conceptual demo visual for ${project.title}`}
+      width={index === 0 ? 1000 : 1536}
+      height={index === 0 ? 1500 : 1024}
+      loading="lazy"
+      decoding="async"
+    />
+    <span class="home-project__view" aria-hidden="true">View project</span>
+  </a>
+  <div class="home-project__meta">
+    <div>
+      <p>{project.category}</p>
+      <h3><a href={withBase(`/portfolio/${project.slug}/`)}>{project.title}</a></h3>
+    </div>
+    <span>{project.year}</span>
+  </div>
+</article>

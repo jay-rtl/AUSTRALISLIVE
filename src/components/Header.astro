@@ -1,0 +1,39 @@
+---
+import { siteConfig } from '../config/site';
+import { primaryNavigation } from '../data/navigation';
+import { withBase } from '../utils/paths';
+import MobileMenu from './MobileMenu.astro';
+
+const currentPath = Astro.url.pathname;
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL.replace(/\/$/, '');
+const localPath = currentPath.startsWith(base) ? currentPath.slice(base.length) || '/' : currentPath;
+const isCurrent = (href: string) => href === '/' ? localPath === '/' : localPath.startsWith(href);
+---
+
+<header class="site-header" data-site-header>
+  <a class="brand" href={withBase('/')} aria-label="MonsterMinds home">
+    <img src={withBase(siteConfig.logoPath)} alt="MonsterMinds" width="320" height="320" />
+  </a>
+
+  <nav class="desktop-navigation" aria-label="Primary navigation">
+    <ul>
+      {primaryNavigation.map((item) => (
+        <li>
+          <a href={withBase(item.href)} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+
+  <a class="header-cta" href={withBase('/contact/')}>Start an inquiry</a>
+  <MobileMenu items={primaryNavigation} currentPath={currentPath} />
+</header>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-site-header]');
+  const updateHeader = () => header?.classList.toggle('is-scrolled', window.scrollY > 24);
+  updateHeader();
+  window.addEventListener('scroll', updateHeader, { passive: true });
+</script>

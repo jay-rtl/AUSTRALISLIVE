@@ -1,0 +1,18 @@
+---
+interface Props {
+  label?: string;
+  title: string;
+  text: string;
+}
+
+const { label = 'Phase 1 placeholder', title, text } = Astro.props;
+---
+
+<section class="placeholder-section">
+  <p class="eyebrow">{label}</p>
+  <div>
+    <h2>{title}</h2>
+    <p>{text}</p>
+    <slot />
+  </div>
+</section>

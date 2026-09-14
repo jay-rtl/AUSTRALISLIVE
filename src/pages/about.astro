@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import PlaceholderSection from '../components/PlaceholderSection.astro';
+---
+
+<BaseLayout
+  title="About — MonsterMinds Demo"
+  description="About page framework for the MonsterMinds sample website. Final company story and team content are required."
+>
+  <PageHero
+    eyebrow="About · Sample"
+    title="The story is yours to tell."
+    intro="[CLIENT BRAND STORY REQUIRED] This page currently demonstrates the intended editorial hierarchy without inventing company history."
+  />
+  <PlaceholderSection
+    title="Story, philosophy, and approach"
+    text="Reserved for approved MonsterMinds messaging, supporting visuals, creative philosophy, and team content."
+  />
+</BaseLayout>

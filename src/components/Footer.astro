@@ -1,0 +1,37 @@
+---
+import { siteConfig } from '../config/site';
+import { contact } from '../data/contact';
+import { legalNavigation, primaryNavigation } from '../data/navigation';
+import { socials } from '../data/socials';
+import { withBase } from '../utils/paths';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="footer-brand">
+    <img src={withBase(siteConfig.logoPath)} alt="" width="320" height="320" loading="lazy" />
+    <p>{siteConfig.demoNotice}</p>
+  </div>
+
+  <div class="footer-column">
+    <p class="eyebrow">Explore</p>
+    <ul>
+      {primaryNavigation.map((item) => <li><a href={withBase(item.href)}>{item.label}</a></li>)}
+    </ul>
+  </div>
+
+  <div class="footer-column">
+    <p class="eyebrow">Contact</p>
+    <p>{contact.email}</p>
+    <p>{contact.phone}</p>
+    {socials.length > 0 && <ul>{socials.map((social) => <li><a href={social.url}>{social.label}</a></li>)}</ul>}
+  </div>
+
+  <div class="footer-meta">
+    <p>© {year} MonsterMinds. Demo website.</p>
+    <nav aria-label="Legal">
+      {legalNavigation.map((item) => <a href={withBase(item.href)}>{item.label}</a>)}
+    </nav>
+  </div>
+</footer>

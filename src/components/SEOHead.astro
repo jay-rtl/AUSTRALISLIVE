@@ -1,0 +1,42 @@
+---
+import { siteConfig } from '../config/site';
+import { withBase } from '../utils/paths';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonicalPath?: string;
+  noindex?: boolean;
+}
+
+const {
+  title = siteConfig.defaultTitle,
+  description = siteConfig.defaultDescription,
+  image = siteConfig.defaultOgImage,
+  canonicalPath = Astro.url.pathname,
+  noindex = false,
+} = Astro.props;
+
+const origin = Astro.site ?? new URL(siteConfig.siteUrl);
+const canonical = new URL(canonicalPath, origin);
+const socialImage = new URL(withBase(image), origin);
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={siteConfig.siteName} />
+<meta property="og:locale" content="en_US" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={socialImage} />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={socialImage} />

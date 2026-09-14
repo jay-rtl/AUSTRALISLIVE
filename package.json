@@ -1,0 +1,23 @@
+{
+  "name": "monsterminds-demo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "qa:capture": "node scripts/qa-capture.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.3.2",
+    "gsap": "^3.15.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "sharp": "^0.35.4",
+    "typescript": "^6.0.3"
+  }
+}

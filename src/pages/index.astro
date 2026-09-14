@@ -1,0 +1,206 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArrowLink from '../components/ArrowLink.astro';
+import HomeProject from '../components/HomeProject.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import { siteConfig } from '../config/site';
+import { projects } from '../data/projects';
+import { services } from '../data/services';
+import { withBase } from '../utils/paths';
+import '../styles/home.css';
+
+const featuredProjects = [...projects].sort((a, b) => a.order - b.order).slice(0, 3);
+const isDev = import.meta.env.DEV;
+const media = {
+  hero: withBase('/images/demo/homepage/hero-stage.webp'),
+  material: withBase('/images/demo/homepage/material-study.webp'),
+  event: withBase('/images/demo/homepage/event-environment.webp'),
+  studio: withBase('/images/demo/homepage/studio-team.webp'),
+};
+---
+
+<BaseLayout
+  title="MonsterMinds — Creative Services"
+  description="A cinematic concept website for MonsterMinds creative services. Portfolio imagery and project details are presented as demo content pending client approval."
+  image="/images/demo/homepage/hero-stage.webp"
+>
+  <Fragment slot="head">
+    <link rel="preload" href={media.hero} as="image" type="image/webp" fetchpriority="high" />
+    <script is:inline define:vars={{ isDev }}>
+      try {
+        if (isDev && new URLSearchParams(location.search).get('replay-intro') === '1') {
+          sessionStorage.removeItem('mm-intro-seen');
+        }
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const seen = sessionStorage.getItem('mm-intro-seen');
+        if (!reduced && !seen) {
+          document.documentElement.classList.add('mm-intro-pending');
+          window.__mmIntroFallback = window.setTimeout(() => {
+            document.documentElement.classList.remove('mm-intro-pending');
+          }, 4500);
+        }
+      } catch (error) {
+        document.documentElement.classList.remove('mm-intro-pending');
+      }
+    </script>
+  </Fragment>
+
+  <div class="cinematic-intro" data-cinematic-intro aria-hidden="true">
+    <div class="cinematic-intro__mark">
+      <svg class="intro-ring" viewBox="0 0 240 240">
+        <circle cx="120" cy="120" r="104"></circle>
+      </svg>
+      <span class="intro-sweep"><i></i></span>
+      <img src={withBase(siteConfig.logoPath)} alt="" width="320" height="320" />
+    </div>
+    <p>Creative Services</p>
+  </div>
+
+  <div class="home-page" data-home-page>
+    <section class="cinematic-hero" aria-labelledby="hero-title">
+      <div class="cinematic-hero__media" data-hero-media>
+        <img
+          src={media.hero}
+          alt="Conceptual demo image of a sculptural event stage illuminated in warm gold light"
+          width="1536"
+          height="1024"
+          fetchpriority="high"
+          decoding="async"
+        />
+        <div class="cinematic-hero__veil"></div>
+        <p class="cinematic-hero__caption">Concept visual · Demo media</p>
+      </div>
+
+      <div class="cinematic-hero__copy">
+        <p class="eyebrow hero-eyebrow">Creative direction · Production · Experiences</p>
+        <h1 id="hero-title" class="hero-title">
+          <span><span>We shape</span></span>
+          <span><span>the moment.</span></span>
+        </h1>
+        <p class="hero-summary">
+          A concept presentation for a creative studio built around atmosphere, intention, and unforgettable visual presence.
+        </p>
+        <div class="hero-actions">
+          <ArrowLink href="/portfolio/" label="Explore the work" variant="filled" />
+          <ArrowLink href="/contact/" label="Start a conversation" variant="text" />
+        </div>
+      </div>
+
+      <div class="hero-rail" aria-hidden="true">
+        <span>MM</span>
+        <span class="hero-rail__line"></span>
+        <span>EST. —</span>
+      </div>
+
+      <a class="scroll-cue" href="#statement" aria-label="Scroll to the next section">
+        <span>Scroll</span>
+        <span class="scroll-cue__line"><span></span></span>
+      </a>
+    </section>
+
+    <section class="brand-statement" id="statement">
+      <div class="brand-statement__meta" data-reveal>
+        <span>00</span>
+        <p>The idea comes first.<br />Everything else follows.</p>
+      </div>
+      <div class="brand-statement__body">
+        <p class="eyebrow" data-reveal>Creative intent, made tangible</p>
+        <h2 class="statement-title" data-statement>
+          We bring space, story, and feeling into one carefully composed experience.
+        </h2>
+        <p data-reveal>
+          This concept copy demonstrates the intended brand voice. Final positioning and approved service language will replace it without changing the design system.
+        </p>
+      </div>
+    </section>
+
+    <section class="home-services" aria-labelledby="services-title">
+      <SectionHeading number="01" label="Selected Services" title="Disciplines in service of one clear idea." titleId="services-title" />
+      <div class="home-services__layout">
+        <div class="service-rows" data-service-list>
+          {services.map((service, index) => (
+            <a class="service-row" href={withBase('/services/')} data-service-row data-index={index}>
+              <span class="service-row__number">{String(index + 1).padStart(2, '0')}</span>
+              <span class="service-row__title">{service.title}</span>
+              <span class="service-row__description">Concept service category</span>
+              <svg viewBox="0 0 32 16" aria-hidden="true"><path d="M1 8h27M21 1l7 7-7 7" /></svg>
+            </a>
+          ))}
+        </div>
+        <figure class="services-preview" data-service-preview data-reveal>
+          <div class="services-preview__frame">
+            <img src={media.material} alt="Conceptual translucent fabric installation in warm studio light" width="1000" height="1500" loading="lazy" decoding="async" />
+          </div>
+          <figcaption>Material, light, atmosphere.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="featured-work" aria-labelledby="work-title">
+      <SectionHeading number="02" label="Selected Work" title="Concept studies for stories still to be told." titleId="work-title" />
+      <p class="featured-work__notice" data-reveal>All projects shown are demo studies for layout presentation.</p>
+      <div class="featured-work__grid">
+        {featuredProjects.map((project, index) => <HomeProject project={project} index={index} />)}
+      </div>
+      <div class="featured-work__link" data-reveal>
+        <ArrowLink href="/portfolio/" label="View all concept projects" variant="outline" />
+      </div>
+    </section>
+
+    <section class="visual-story" aria-label="Creative approach">
+      <div class="visual-story__media" data-story-media>
+        <img src={media.hero} alt="Conceptual illuminated production environment" width="1536" height="1024" loading="lazy" decoding="async" />
+      </div>
+      <p class="visual-story__vertical" aria-hidden="true">MonsterMinds · Creative Services</p>
+      <div class="visual-story__copy" data-reveal>
+        <p class="eyebrow">Built from the atmosphere up</p>
+        <h2>More than a setting. A world with its own pulse.</h2>
+        <p>Every visual decision should move the same story forward—from the first impression to the final detail.</p>
+      </div>
+    </section>
+
+    <section class="home-events" aria-labelledby="events-title">
+      <SectionHeading number="03" label="Events & Experiences" title="Designed to be felt in the room." titleId="events-title" />
+      <div class="events-composition">
+        <figure class="events-composition__main" data-reveal>
+          <div><img src={media.event} alt="Conceptual black-and-gold event environment before guests arrive" width="1536" height="1024" loading="lazy" decoding="async" /></div>
+          <figcaption><span>01</span> Environment study</figcaption>
+        </figure>
+        <figure class="events-composition__detail" data-reveal>
+          <div><img src={media.material} alt="Detail of a conceptual fabric and brass installation" width="1000" height="1500" loading="lazy" decoding="async" /></div>
+          <figcaption><span>02</span> Material study</figcaption>
+        </figure>
+        <div class="events-composition__copy" data-reveal>
+          <p>Demo imagery, art-directed as a cohesive visual system while approved event documentation is pending.</p>
+          <ArrowLink href="/events/" label="Explore experiences" variant="text" />
+        </div>
+      </div>
+    </section>
+
+    <section class="about-teaser" aria-labelledby="about-title">
+      <div class="about-teaser__media" data-about-media>
+        <img src={media.studio} alt="Anonymous creative team collaborating around an illuminated set model" width="1600" height="800" loading="lazy" decoding="async" />
+      </div>
+      <div class="about-teaser__copy" data-reveal>
+        <p class="eyebrow">Behind every moment</p>
+        <h2 id="about-title">Passionate minds.<br /><em>Purposeful creation.</em></h2>
+        <p>
+          A temporary brand-story direction centered on close collaboration, considered craft, and a shared respect for the smallest details.
+        </p>
+        <ArrowLink href="/about/" label="Discover the approach" variant="text" />
+      </div>
+    </section>
+
+    <section class="final-cta" aria-labelledby="cta-title">
+      <p class="eyebrow" data-reveal>Have an idea in mind?</p>
+      <h2 id="cta-title" data-reveal>Let’s create something<br /><em>worth remembering.</em></h2>
+      <div data-reveal><ArrowLink href="/contact/" label="Start an inquiry" variant="outline" /></div>
+      <span class="final-cta__orb" aria-hidden="true"></span>
+    </section>
+  </div>
+
+  <script>
+    import { initHomeExperience } from '../scripts/animations/home';
+    initHomeExperience();
+  </script>
+</BaseLayout>

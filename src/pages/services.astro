@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { services } from '../data/services';
+---
+
+<BaseLayout
+  title="Services — MonsterMinds Demo"
+  description="Demo services architecture for MonsterMinds. Final service names, scope, and descriptions require client approval."
+>
+  <PageHero
+    eyebrow="Services · Demo content"
+    title="Creative disciplines, deliberately shaped."
+    intro="The entries below are placeholders for layout and content-model testing only. They are not verified service claims."
+  />
+  <section class="content-shell" aria-labelledby="services-list-title">
+    <h2 class="sr-only" id="services-list-title">Demo services</h2>
+    <ul class="service-list">
+      {services.map((service) => (
+        <li>
+          <h2>{service.title}</h2>
+          <p>{service.description}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>

@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import { projects, type Project } from '../../data/projects';
+import { withBase } from '../../utils/paths';
+
+export function getStaticPaths() {
+  const sortedProjects = [...projects].sort((a, b) => a.order - b.order);
+
+  return sortedProjects.map((project, index) => ({
+    params: { slug: project.slug },
+    props: {
+      project,
+      previous: sortedProjects[index - 1] ?? sortedProjects.at(-1),
+      next: sortedProjects[index + 1] ?? sortedProjects[0],
+    },
+  }));
+}
+
+interface Props {
+  project: Project;
+  previous: Project;
+  next: Project;
+}
+
+const { project, previous, next } = Astro.props;
+---
+
+<BaseLayout
+  title={project.seoTitle}
+  description={project.seoDescription}
+  image={project.ogImage ?? project.coverImage}
+>
+  <PageHero
+    eyebrow={`${project.category} · ${project.year}`}
+    title={project.title}
+    intro={project.shortDescription}
+  />
+  <article class="project-article">
+    <div class="demo-media" role="img" aria-label="Demo media placeholder">Demo media · client assets required</div>
+    {project.content.map((paragraph) => <p>{paragraph}</p>)}
+    <nav class="project-pagination" aria-label="Project pagination">
+      <a href={withBase(`/portfolio/${previous.slug}/`)}>← {previous.title}</a>
+      <a href={withBase(`/portfolio/${next.slug}/`)}>{next.title} →</a>
+    </nav>
+  </article>
+</BaseLayout>
