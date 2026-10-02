@@ -11,8 +11,8 @@ const isCurrent = (href: string) => href === '/' ? localPath === '/' : localPath
 ---
 
 <header class="site-header" data-site-header>
-  <a class="brand" href={withBase('/')} aria-label="MonsterMinds home">
-    <img src={withBase(siteConfig.logoPath)} alt="MonsterMinds" width="320" height="320" />
+  <a class="brand" href={withBase('/')} aria-label={`${siteConfig.brandDisplayName} home`}>
+    <img src={withBase(siteConfig.logoPath)} alt={siteConfig.brandDisplayName} width="1254" height="1254" />
   </a>
 
   <nav class="desktop-navigation" aria-label="Primary navigation">

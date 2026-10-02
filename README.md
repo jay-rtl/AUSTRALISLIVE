@@ -1,14 +1,14 @@
-# MonsterMinds Sample Website
+# AUSTRALIS LIVE Sample Website
 
-A production-oriented Astro website for a public MonsterMinds client presentation. The homepage visual experience is implemented with a cinematic hero, editorial sections, responsive GSAP motion, polished interactions, and optimized concept imagery. Final client facts, project records, legal text, contact details, and official media remain pending.
+A production-oriented Astro website for a public AUSTRALIS LIVE client presentation. The homepage visual experience is implemented with a cinematic hero, editorial sections, responsive GSAP motion, polished interactions, and optimized concept imagery. Final client facts, project records, legal text, contact details, and official media remain pending.
 
 ## Demo status
 
 - All portfolio entries and service descriptions are marked as demo content.
 - The contact form validates in the browser but never transmits or stores data.
 - The legal routes are placeholders and carry `noindex` metadata.
-- `public/images/brand/monsterminds-logo.svg` is a temporary asset marker because the original logo binary was not included in the attachment bundle. Replace it with an optimized export of the official supplied logo, preserving the filename or update the single `logoPath` setting in `src/config/site.ts`.
-- Homepage copy and imagery are tasteful concept content, not verified MonsterMinds claims or client work.
+- `public/images/brand/australis-live-logo.png` is the original supplied gold-on-black official logo (1254 x 1254 PNG, opaque, unmodified). Header, footer, intro and favicon use the centralized `logoPath`.
+- Homepage copy and imagery are tasteful concept content, not verified AUSTRALIS LIVE claims or client work.
 - Internal pages retain the Phase 1 editorial foundation and are intentionally awaiting separate page-specific design approval.
 
 ## Stack
@@ -119,11 +119,11 @@ Keep unverified material explicitly marked as demo content. Replace content data
 
 ## Animation notes
 
-The homepage animation system is split into focused modules under `src/scripts/animations/`. The first-session intro uses `sessionStorage`; return visits receive only a short hero entrance. A 4.5-second safety fallback prevents the overlay from trapping visitors if the main bundle fails. Pointer parallax is limited to fine-pointer desktop devices, mobile motion distances are reduced, and `prefers-reduced-motion` bypasses the intro and non-essential transforms. All critical content remains in crawlable HTML.
+The homepage animation system is split into focused modules under `src/scripts/animations/`. The first-session intro uses `sessionStorage`; return visits skip the full entrance. A 4.5-second safety fallback prevents the overlay from trapping visitors if the main bundle fails. Pointer parallax is limited to fine-pointer desktop devices, mobile motion distances are reduced, and `prefers-reduced-motion` bypasses the intro and non-essential transforms. All critical content remains in crawlable HTML.
 
 ## Demo image assets
 
-The WebP files under `public/images/demo/homepage/` were generated specifically for this concept using the built-in OpenAI image generation tool, then resized and compressed locally with Sharp. They contain no client logos, readable brand text, or claimed project documentation. Replace them with approved, licensed MonsterMinds media before production launch.
+The WebP files under `public/images/demo/homepage/` were generated specifically for this concept using the built-in OpenAI image generation tool, then resized and compressed locally with Sharp. They contain no client logos, readable brand text, or claimed project documentation. Replace them with approved, licensed AUSTRALIS LIVE media before production launch.
 
 ## Visual QA
 
@@ -131,9 +131,9 @@ The reusable `scripts/qa-capture.mjs` utility drives an installed Chromium brows
 
 ## Production checklist for later phases
 
-- Replace the logo marker with the untouched official logo export.
+- Official gold-on-black logo integrated; retain the original supplied file.
 - Confirm final domain and repository name.
 - Supply approved company, service, project, contact, social, and legal content.
-- Supply approved MonsterMinds imagery and a production social-share image.
+- Supply approved AUSTRALIS LIVE imagery and a production social-share image.
 - Decide between a Hostinger PHP handler and an approved third-party contact provider.
 - Complete page-specific visual design and audits for the remaining internal routes after approval.

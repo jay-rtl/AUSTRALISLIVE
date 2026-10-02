@@ -10,5 +10,5 @@ interface ImportMeta {
 }
 
 interface Window {
-  __mmIntroFallback?: number;
+  __alIntroFallback?: number;
 }

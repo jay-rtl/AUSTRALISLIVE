@@ -12,7 +12,7 @@ const captureDelay = Number(waitValue);
 const output = path.resolve(outputValue);
 const chrome = process.env.CHROME_PATH || 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
 const port = 9333 + Math.floor(Math.random() * 400);
-const profile = path.join(os.tmpdir(), `monsterminds-cdp-${Date.now()}`);
+const profile = path.join(os.tmpdir(), `australis-cdp-${Date.now()}`);
 
 await mkdir(path.dirname(output), { recursive: true });
 const browser = spawn(chrome, [
@@ -78,6 +78,14 @@ try {
     pending.set(id, { resolve, reject });
     socket.send(JSON.stringify({ id, method, params }));
   });
+  const ready = async () => {
+    for (let attempt = 0; attempt < 100; attempt++) {
+      const state = await send('Runtime.evaluate', { expression: "document.readyState === 'complete' && document.querySelector('.menu-toggle')?.dataset.ready === 'true'", returnByValue: true });
+      if (state.result.value) return;
+      await delay(100);
+    }
+    throw new Error('Page did not initialize');
+  };
 
   await Promise.all([send('Page.enable'), send('Runtime.enable'), send('Log.enable'), send('Network.enable')]);
   await send('Emulation.setDeviceMetricsOverride', {
@@ -91,8 +99,11 @@ try {
   await send('Emulation.setEmulatedMedia', {
     features: [{ name: 'prefers-reduced-motion', value: motionValue }],
   });
+  if (captureMode === 'nojs') await send('Emulation.setScriptExecutionDisabled', { value: true });
+  if (captureMode === 'fallback') await send('Network.setBlockedURLs', { urls: ['*.js'] });
   await send('Page.navigate', { url });
   await delay(captureDelay);
+  if (captureDelay >= 4000 && !['nojs', 'fallback'].includes(captureMode)) await ready();
   if (captureMode === 'full') {
     const pageHeight = await send('Runtime.evaluate', { expression: 'document.documentElement.scrollHeight', returnByValue: true });
     for (let y = 0; y < pageHeight.result.value; y += Math.round(height * 0.72)) {
@@ -106,6 +117,14 @@ try {
     await send('Runtime.evaluate', { expression: `document.querySelector('.menu-toggle')?.click()` });
     await delay(700);
   }
+  if (captureMode === 'footer') {
+    await send('Runtime.evaluate', { expression: "scrollTo({top: document.querySelector('.site-footer').offsetTop - 120, behavior: 'instant'})" });
+    await delay(800);
+  }
+  if (captureMode === 'services') {
+    await send('Runtime.evaluate', { expression: "scrollTo({top: document.querySelector('.home-services__layout').getBoundingClientRect().top + scrollY - 160, behavior: 'instant'})" });
+    await delay(1200);
+  }
 
   const metrics = await send('Runtime.evaluate', {
     expression: `JSON.stringify({
@@ -113,12 +132,12 @@ try {
       height: innerHeight,
       scrollWidth: document.documentElement.scrollWidth,
       scrollHeight: document.documentElement.scrollHeight,
-      introPending: document.documentElement.classList.contains('mm-intro-pending'),
+      introPending: document.documentElement.classList.contains('al-intro-pending'),
       introVisibility: getComputedStyle(document.querySelector('[data-cinematic-intro]')).visibility,
       heading: document.querySelector('h1')?.innerText,
       criticalImagesComplete: [...document.images].filter((image) => image.loading !== 'lazy').every((image) => image.complete && image.naturalWidth > 0),
       missingCriticalImages: [...document.images].filter((image) => image.loading !== 'lazy' && (!image.complete || image.naturalWidth === 0)).map((image) => image.src),
-      introSeen: sessionStorage.getItem('mm-intro-seen'),
+      introSeen: sessionStorage.getItem('al-intro-seen'),
       reducedMotion: matchMedia('(prefers-reduced-motion: reduce)').matches
     })`,
     returnByValue: true,
@@ -127,22 +146,27 @@ try {
   await writeFile(output, Buffer.from(screenshot.data, 'base64'));
   let replayMetrics = null;
   let menuMetrics = null;
-  if (captureDelay >= 4000) {
+  let interactionMetrics = null;
+  if (captureDelay >= 4000 && !['nojs', 'fallback'].includes(captureMode)) {
     await send('Page.reload');
+    await delay(300);
+    await ready();
     await delay(1400);
     const replay = await send('Runtime.evaluate', {
       expression: `JSON.stringify({
-        introPending: document.documentElement.classList.contains('mm-intro-pending'),
+        introPending: document.documentElement.classList.contains('al-intro-pending'),
         introVisibility: getComputedStyle(document.querySelector('[data-cinematic-intro]')).visibility,
-        introSeen: sessionStorage.getItem('mm-intro-seen')
+        introSeen: sessionStorage.getItem('al-intro-seen')
       })`,
       returnByValue: true,
     });
     replayMetrics = JSON.parse(replay.result.value);
   }
-  if (captureDelay >= 4000 && width < 1088) {
+  if (captureDelay >= 4000 && width < 1088 && !['nojs', 'fallback'].includes(captureMode)) {
     await send('Runtime.evaluate', { expression: `document.querySelector('.menu-toggle')?.click()` });
     await delay(600);
+    const menuScreenshot = await send('Page.captureScreenshot', { format: 'png' });
+    await writeFile(output.replace('.png', '-menu.png'), Buffer.from(menuScreenshot.data, 'base64'));
     const openMenu = await send('Runtime.evaluate', {
       expression: `JSON.stringify({
         expanded: document.querySelector('.menu-toggle')?.getAttribute('aria-expanded'),
@@ -169,20 +193,48 @@ try {
       returnByValue: true,
     });
     menuMetrics = { open: JSON.parse(openMenu.result.value), closed: JSON.parse(closedMenu.result.value) };
+    const evaluate = async (expression) => (await send('Runtime.evaluate', { expression, returnByValue: true })).result.value;
+    await evaluate("scrollTo({top: 350, behavior: 'instant'})");
+    await delay(100);
+    await evaluate("document.querySelector('.menu-toggle').click()");
+    await delay(650);
+    const lockTop = await evaluate('document.body.style.top');
+    await evaluate("document.querySelector('.mobile-menu__cta').focus()");
+    await send('Input.dispatchKeyEvent', { type: 'keyDown', key: 'Tab', code: 'Tab', windowsVirtualKeyCode: 9 });
+    const focusWrapped = await evaluate("document.activeElement === document.querySelector('.menu-close')");
+    await evaluate("document.querySelector('.menu-close').click()");
+    await delay(500);
+    const restoredY = await evaluate('scrollY');
+    await evaluate("document.querySelector('.menu-toggle').click()");
+    await delay(600);
+    await send('Emulation.setDeviceMetricsOverride', { width: 1440, height: 900, deviceScaleFactor: 1, mobile: false });
+    await delay(600);
+    const resizeUnlocked = await evaluate("!document.body.classList.contains('menu-open') && document.querySelector('.mobile-menu').hidden");
+    await send('Emulation.setDeviceMetricsOverride', { width: 320, height: 360, deviceScaleFactor: 1, mobile: true });
+    await evaluate("document.querySelector('.menu-toggle').click()");
+    await delay(650);
+    const shortScroll = await evaluate("(()=>{const m=document.querySelector('.mobile-menu');m.scrollTop=999;return {height:m.clientHeight,scrollHeight:m.scrollHeight,scrollTop:m.scrollTop}})()");
+    await evaluate("document.querySelector('.mobile-menu a[href]').click()");
+    await delay(700);
+    const navigationUnlocked = await evaluate("!document.body.classList.contains('menu-open')");
+    interactionMetrics = { lockTop, focusWrapped, restoredY, resizeUnlocked, shortScroll, navigationUnlocked };
   }
 
-  console.log(JSON.stringify({
+  const report = {
     output,
     metrics: JSON.parse(metrics.result.value),
     replayMetrics,
     menuMetrics,
+    interactionMetrics,
     runtimeIssues: [...new Set(runtimeIssues)],
-  }, null, 2));
+  };
+  await writeFile(output + '.json', JSON.stringify(report, null, 2));
+  console.log(JSON.stringify(report, null, 2));
   socket.close();
 } finally {
   browser.kill();
   await delay(500);
-  if (path.dirname(profile) === os.tmpdir() && path.basename(profile).startsWith('monsterminds-cdp-')) {
+  if (path.dirname(profile) === os.tmpdir() && path.basename(profile).startsWith('australis-cdp-')) {
     try {
       await rm(profile, { recursive: true, force: true, maxRetries: 3, retryDelay: 250 });
     } catch {

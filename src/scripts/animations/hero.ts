@@ -30,7 +30,7 @@ export function initHeroMotion() {
     };
   });
 
-  mediaQueries.add(`(prefers-reduced-motion: no-preference)`, () => {
+  mediaQueries.add(`(min-width: 64rem) and (prefers-reduced-motion: no-preference)`, () => {
     const timeline = gsap.timeline({
       scrollTrigger: {
         trigger: hero,

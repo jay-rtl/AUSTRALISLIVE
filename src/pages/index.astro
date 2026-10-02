@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ArrowLink from '../components/ArrowLink.astro';
 import HomeProject from '../components/HomeProject.astro';
 import SectionHeading from '../components/SectionHeading.astro';
-import { siteConfig } from '../config/site';
+import { siteConfig, homeCopy } from '../config/site';
 import { projects } from '../data/projects';
 import { services } from '../data/services';
 import { withBase } from '../utils/paths';
@@ -20,40 +20,38 @@ const media = {
 ---
 
 <BaseLayout
-  title="MonsterMinds — Creative Services"
-  description="A cinematic concept website for MonsterMinds creative services. Portfolio imagery and project details are presented as demo content pending client approval."
+  title={siteConfig.defaultTitle}
+  description={siteConfig.defaultDescription}
   image="/images/demo/homepage/hero-stage.webp"
 >
   <Fragment slot="head">
+    <link rel="preload" href={withBase(siteConfig.logoPath)} as="image" type="image/png" />
     <link rel="preload" href={media.hero} as="image" type="image/webp" fetchpriority="high" />
     <script is:inline define:vars={{ isDev }}>
       try {
         if (isDev && new URLSearchParams(location.search).get('replay-intro') === '1') {
-          sessionStorage.removeItem('mm-intro-seen');
+          sessionStorage.removeItem('al-intro-seen');
         }
         const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const seen = sessionStorage.getItem('mm-intro-seen');
+        const seen = sessionStorage.getItem('al-intro-seen');
         if (!reduced && !seen) {
-          document.documentElement.classList.add('mm-intro-pending');
-          window.__mmIntroFallback = window.setTimeout(() => {
-            document.documentElement.classList.remove('mm-intro-pending');
+          document.documentElement.classList.add('al-intro-pending');
+          window.__alIntroFallback = window.setTimeout(() => {
+            document.documentElement.classList.remove('al-intro-pending');
           }, 4500);
         }
       } catch (error) {
-        document.documentElement.classList.remove('mm-intro-pending');
+        document.documentElement.classList.remove('al-intro-pending');
       }
     </script>
   </Fragment>
 
   <div class="cinematic-intro" data-cinematic-intro aria-hidden="true">
     <div class="cinematic-intro__mark">
-      <svg class="intro-ring" viewBox="0 0 240 240">
-        <circle cx="120" cy="120" r="104"></circle>
-      </svg>
-      <span class="intro-sweep"><i></i></span>
-      <img src={withBase(siteConfig.logoPath)} alt="" width="320" height="320" />
+      <span class="intro-accent"></span>
+      <img src={withBase(siteConfig.logoPath)} alt="" width="1254" height="1254" fetchpriority="high" decoding="async" />
     </div>
-    <p>Creative Services</p>
+
   </div>
 
   <div class="home-page" data-home-page>
@@ -72,24 +70,23 @@ const media = {
       </div>
 
       <div class="cinematic-hero__copy">
-        <p class="eyebrow hero-eyebrow">Creative direction · Production · Experiences</p>
+        <p class="eyebrow hero-eyebrow">{homeCopy.eyebrow}</p>
         <h1 id="hero-title" class="hero-title">
-          <span><span>We shape</span></span>
-          <span><span>the moment.</span></span>
+          {homeCopy.headline.map((line) => <span><span>{line}</span></span>)}
         </h1>
         <p class="hero-summary">
-          A concept presentation for a creative studio built around atmosphere, intention, and unforgettable visual presence.
+          {homeCopy.summary}
         </p>
         <div class="hero-actions">
-          <ArrowLink href="/portfolio/" label="Explore the work" variant="filled" />
-          <ArrowLink href="/contact/" label="Start a conversation" variant="text" />
+          <ArrowLink href="/portfolio/" label={homeCopy.workCta} variant="filled" />
+          <ArrowLink href="/contact/" label={homeCopy.inquiryCta} variant="text" />
         </div>
       </div>
 
       <div class="hero-rail" aria-hidden="true">
-        <span>MM</span>
+        <span>AL</span>
         <span class="hero-rail__line"></span>
-        <span>EST. —</span>
+        <span>LIVE</span>
       </div>
 
       <a class="scroll-cue" href="#statement" aria-label="Scroll to the next section">
@@ -151,7 +148,7 @@ const media = {
       <div class="visual-story__media" data-story-media>
         <img src={media.hero} alt="Conceptual illuminated production environment" width="1536" height="1024" loading="lazy" decoding="async" />
       </div>
-      <p class="visual-story__vertical" aria-hidden="true">MonsterMinds · Creative Services</p>
+      <p class="visual-story__vertical" aria-hidden="true">AUSTRALIS LIVE · Creative Services</p>
       <div class="visual-story__copy" data-reveal>
         <p class="eyebrow">Built from the atmosphere up</p>
         <h2>More than a setting. A world with its own pulse.</h2>

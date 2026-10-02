@@ -16,16 +16,16 @@
   visibility: hidden;
   align-content: center;
   justify-items: center;
-  background: #050505;
+  background: #000;
   opacity: 0;
   pointer-events: none;
 }
 
-.mm-intro-pending {
+.al-intro-pending {
   overflow: hidden;
 }
 
-.mm-intro-pending .cinematic-intro {
+.al-intro-pending .cinematic-intro {
   visibility: visible;
   opacity: 1;
   pointer-events: auto;
@@ -33,72 +33,34 @@
 
 .cinematic-intro__mark {
   position: relative;
-  display: grid;
-  width: clamp(13rem, 28vw, 19rem);
+  width: min(70vw, 580px, 76svh);
   aspect-ratio: 1;
-  place-items: center;
 }
-
-.cinematic-intro__mark img {
-  width: 82%;
-  opacity: 0;
-}
-
-.intro-ring {
+.cinematic-intro__mark img { width: 100%; height: auto; opacity: 0; }
+.intro-accent {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  overflow: visible;
-  transform: rotate(-90deg);
-}
-
-.intro-ring circle {
-  fill: none;
-  stroke: var(--gold);
-  stroke-dasharray: 654;
-  stroke-dashoffset: 654;
-  stroke-width: 1;
-}
-
-.intro-sweep {
-  position: absolute;
-  inset: 8%;
-  overflow: hidden;
-  border-radius: 50%;
+  bottom: 8%;
+  left: 25%;
+  width: 50%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
   opacity: 0;
+  z-index: 1;
 }
-
-.intro-sweep i {
-  position: absolute;
-  inset: -20%;
-  display: block;
-  transform: translateX(-150%) rotate(18deg);
-  background: linear-gradient(90deg, transparent, rgba(230, 199, 106, 0.24), transparent);
+@media (max-width: 767px) {
+  .cinematic-intro__mark { width: min(90vw, 430px, 72svh); }
 }
+/* Recover content even when the animation bundle fails after setting inline styles. */
+.al-intro-failed .cinematic-intro { visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; }
+.al-intro-failed .hero-title > span > span,
+.al-intro-failed .hero-eyebrow, .al-intro-failed .hero-summary,
+.al-intro-failed .hero-actions .arrow-link, .al-intro-failed .site-header,
+.al-intro-failed .hero-rail, .al-intro-failed .scroll-cue,
+.al-intro-failed [data-hero-media] { opacity: 1 !important; visibility: visible !important; transform: none !important; clip-path: none !important; }
 
-.cinematic-intro > p {
-  margin: 2rem 0 0;
-  color: var(--gold-soft);
-  font-size: 0.65rem;
-  letter-spacing: 0.34em;
-  text-transform: uppercase;
-  opacity: 0;
-}
-
-@media (max-width: 47.99rem) {
-  .cinematic-intro__mark {
-    width: min(66vw, 14rem);
-  }
-
-  .cinematic-intro > p {
-    margin-top: 1.4rem;
-    font-size: 0.58rem;
-  }
-}
-
-.mm-intro-pending .site-header,
-.mm-intro-pending .hero-rail,
-.mm-intro-pending .scroll-cue {
+.al-intro-pending .site-header,
+.al-intro-pending .hero-rail,
+.al-intro-pending .scroll-cue {
   opacity: 0;
 }
 
@@ -167,9 +129,9 @@
 }
 
 .hero-title {
-  max-width: 8.8ch;
+  max-width: 15ch;
   margin-bottom: 1.8rem;
-  font-size: clamp(3.6rem, 12vw, 10.7rem);
+  font-size: clamp(2.25rem, 7.4vw, 8rem);
   letter-spacing: -0.065em;
   line-height: 0.82;
 }
@@ -435,6 +397,7 @@
 }
 
 .home-services {
+  padding-inline: clamp(1rem, 4vw, 5rem);
   background: var(--black-2);
 }
 
@@ -449,10 +412,11 @@
 
 .service-row {
   display: grid;
-  grid-template-columns: 2.2rem 1fr auto;
+  grid-template-columns: 1.5rem minmax(0, 1fr) auto;
   align-items: center;
-  gap: 0.8rem;
-  min-height: 5.6rem;
+  gap: clamp(0.75rem, 1.6vw, 1.75rem);
+  min-height: 6.25rem;
+  padding: 1.25rem clamp(0.25rem, 0.75vw, 0.75rem);
   border-bottom: 1px solid rgba(255, 255, 255, 0.14);
   transition: border-color 300ms ease, color 300ms ease;
 }
@@ -469,10 +433,12 @@
   text-transform: uppercase;
 }
 
+.service-row__number { font-variant-numeric: tabular-nums; }
+
 .service-row__title {
   font-family: var(--display);
   font-size: clamp(1.25rem, 2.5vw, 2.4rem);
-  line-height: 1.05;
+  line-height: 1.2;
   transition: transform 350ms cubic-bezier(0.2, 0.75, 0.3, 1);
 }
 
@@ -872,12 +838,12 @@
   }
 
   .service-row__description {
-    display: inline;
+    display: none;
   }
 
   .service-row {
-    grid-template-columns: 2.5rem minmax(0, 1fr) auto 2rem;
-    min-height: 7rem;
+    grid-template-columns: 2rem minmax(0, 1fr) 2rem;
+    min-height: 7.5rem;
   }
 
   .services-preview {
@@ -950,7 +916,7 @@
   }
 
   .hero-title {
-    font-size: clamp(6.3rem, 9.2vw, 10.7rem);
+    font-size: clamp(4.6rem, 7.4vw, 8rem);
   }
 
   .hero-rail {
@@ -963,6 +929,15 @@
 }
 
 @media (max-width: 47.99rem) {
+  .cinematic-hero__copy {
+    padding-top: 10rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .hero-eyebrow { font-size: 0.62rem; max-width: 29em; }
+  .hero-summary { margin-bottom: 1.5rem; }
+  .hero-actions { align-items: stretch; gap: 0.7rem; flex-direction: column; }
+  .hero-actions .arrow-link { justify-content: space-between; }
   .cinematic-hero__veil {
     background:
       linear-gradient(0deg, var(--black) 4%, rgba(8, 8, 8, 0.88) 39%, rgba(8, 8, 8, 0.08) 82%),
@@ -1007,13 +982,13 @@
     display: none !important;
   }
 
-  .mm-intro-pending {
+  .al-intro-pending {
     overflow: auto;
   }
 
-  .mm-intro-pending .site-header,
-  .mm-intro-pending .hero-rail,
-  .mm-intro-pending .scroll-cue {
+  .al-intro-pending .site-header,
+  .al-intro-pending .hero-rail,
+  .al-intro-pending .scroll-cue {
     opacity: 1;
   }
 
@@ -1028,4 +1003,11 @@
   .arrow-link svg {
     transform: none !important;
   }
+}
+
+@media (min-width: 768px) { .cinematic-hero__caption { right: auto; left: 45%; bottom: 2rem; } }
+
+@media (min-width: 75rem) {
+  .service-row { grid-template-columns: 2rem minmax(0, 1fr) auto 2rem; }
+  .service-row__description { display: inline; }
 }

@@ -1,4 +1,6 @@
 ---
+import { siteConfig } from '../config/site';
+import { withBase } from '../utils/paths';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import SEOHead from '../components/SEOHead.astro';
@@ -21,7 +23,7 @@ const { title, description, image, noindex } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#080808" />
     <meta name="generator" content={Astro.generator} />
-    <link rel="icon" href={`${import.meta.env.BASE_URL}images/brand/monsterminds-logo.svg`} type="image/svg+xml" />
+    <link rel="icon" href={withBase(siteConfig.logoPath)} type="image/png" />
     <SEOHead title={title} description={description} image={image} noindex={noindex} />
     <slot name="head" />
   </head>

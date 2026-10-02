@@ -25,8 +25,8 @@ export const projects: Project[] = [
     shortDescription: 'A clearly marked placeholder entry used to validate the portfolio detail template.',
     coverImage: '/images/demo/homepage/material-study.webp',
     gallery: [],
-    seoTitle: 'Demo Editorial Study — MonsterMinds Sample',
-    seoDescription: 'Demo portfolio entry for layout testing. This is not presented as verified MonsterMinds work.',
+    seoTitle: 'Demo Editorial Study — AUSTRALIS LIVE Sample',
+    seoDescription: 'Demo portfolio entry for layout testing. This is not presented as verified AUSTRALIS LIVE work.',
     isDemo: true,
     order: 1,
     content: [
@@ -42,8 +42,8 @@ export const projects: Project[] = [
     shortDescription: 'A second placeholder entry for previous and next project navigation testing.',
     coverImage: '/images/demo/homepage/event-environment.webp',
     gallery: [],
-    seoTitle: 'Demo Experience Study — MonsterMinds Sample',
-    seoDescription: 'Demo portfolio entry for route testing. This is not presented as verified MonsterMinds work.',
+    seoTitle: 'Demo Experience Study — AUSTRALIS LIVE Sample',
+    seoDescription: 'Demo portfolio entry for route testing. This is not presented as verified AUSTRALIS LIVE work.',
     isDemo: true,
     order: 2,
     content: [
@@ -59,8 +59,8 @@ export const projects: Project[] = [
     shortDescription: 'A conceptual production study used to demonstrate the featured-work composition.',
     coverImage: '/images/demo/homepage/hero-stage.webp',
     gallery: [],
-    seoTitle: 'Demo Spatial Study — MonsterMinds Sample',
-    seoDescription: 'Demo portfolio entry for layout testing. This is not presented as verified MonsterMinds work.',
+    seoTitle: 'Demo Spatial Study — AUSTRALIS LIVE Sample',
+    seoDescription: 'Demo portfolio entry for layout testing. This is not presented as verified AUSTRALIS LIVE work.',
     isDemo: true,
     order: 3,
     content: [
