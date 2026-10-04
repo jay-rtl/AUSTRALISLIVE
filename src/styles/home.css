@@ -769,7 +769,7 @@
   place-items: center;
   min-height: 0;
   padding: clamp(1rem, 4vw, 4rem);
-  background: #000;
+  background: transparent;
 }
 
 .about-teaser__brand img {
