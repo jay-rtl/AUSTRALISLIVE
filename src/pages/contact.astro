@@ -1,58 +1,15 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
-import { services } from '../data/services';
+import { contact } from '../data/contact';
+import { tourTickets, referenceSite } from '../data/shows';
+import '../styles/shows.css';
 ---
-
-<BaseLayout
-  title="Contact — AUSTRALIS LIVE Demo"
-  description="Demo inquiry interface for AUSTRALIS LIVE. The form does not transmit or store submissions during the sample phase."
->
-  <PageHero
-    eyebrow="Contact · Demo form"
-    title="Begin with a conversation."
-    intro="This static demo does not send or store form data. A production handler can be connected later without redesigning this interface."
-  />
-  <section class="content-shell" aria-labelledby="inquiry-title">
-    <h2 id="inquiry-title">Project inquiry</h2>
-    <form class="form-grid" data-demo-form>
-      <div class="field">
-        <label for="full-name">Full Name</label>
-        <input id="full-name" name="fullName" autocomplete="name" required />
-      </div>
-      <div class="field">
-        <label for="email">Email</label>
-        <input id="email" name="email" type="email" autocomplete="email" required />
-      </div>
-      <div class="field">
-        <label for="phone">Phone <span>(optional)</span></label>
-        <input id="phone" name="phone" type="tel" autocomplete="tel" />
-      </div>
-      <div class="field">
-        <label for="company">Company <span>(optional)</span></label>
-        <input id="company" name="company" autocomplete="organization" />
-      </div>
-      <div class="field field-wide">
-        <label for="service">Service Interested In</label>
-        <select id="service" name="service">
-          <option value="">Select a demo service</option>
-          {services.map((service) => <option value={service.title}>{service.title}</option>)}
-        </select>
-      </div>
-      <div class="field field-wide">
-        <label for="message">Message</label>
-        <textarea id="message" name="message" required></textarea>
-      </div>
-      <button class="button" type="submit">Submit inquiry</button>
-      <p class="form-status" role="status" aria-live="polite"></p>
-    </form>
-  </section>
+<BaseLayout title="Enquiries | Australis Live" description="Find official ticket information and event support for AUSTRALIS LIVE shows.">
+  <PageHero eyebrow="Enquiries" title="Let's get you to the show." intro="For tickets and event-specific questions, start with the official listing for your city." />
+  <div class="show-page">
+    {contact.email && <section class="contact-card"><p class="eyebrow">AUSTRALIS LIVE</p><h2>Get in touch.</h2><p>For entertainment, management and production enquiries.</p><a href={'mailto:' + contact.email}>{contact.email}</a></section>}
+    <section class="contact-card"><p class="eyebrow">Tickets & event support</p><h2>Choose your city.</h2><p>Open the event listing for ticket options, venue information and the organizer's contact channel. Ticket purchases take place on Humanitix.</p><a href={tourTickets}>View official ticket listings &#8599;</a></section>
+    <section class="contact-card"><p class="eyebrow">Tour updates</p><h2>Stay in the loop.</h2><p>Visit Strictly Epic Studio for the latest LAKAS TAMA tour announcements.</p><a href={referenceSite}>Visit Strictly Epic Studio &#8599;</a></section>
+  </div>
 </BaseLayout>
-
-<script>
-  document.querySelector<HTMLFormElement>('[data-demo-form]')?.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const status = document.querySelector<HTMLElement>('.form-status');
-    if (status) status.textContent = 'Demo form — submission will be connected for production.';
-  });
-</script>

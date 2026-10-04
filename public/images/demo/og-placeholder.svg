@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
-  <title id="title">AUSTRALIS LIVE demo social image</title>
-  <desc id="desc">Black and gold placeholder graphic for the AUSTRALIS LIVE sample website.</desc>
-  <rect width="1200" height="630" fill="#080808"/>
-  <path d="M80 98h1040M80 532h1040" stroke="#D4AF37" stroke-width="2"/>
-  <text x="80" y="295" fill="#F5F5F5" font-family="Arial, sans-serif" font-size="94" font-weight="700" letter-spacing="8">AUSTRALIS LIVE</text>
-  <text x="84" y="354" fill="#D4AF37" font-family="Arial, sans-serif" font-size="22" letter-spacing="7">SAMPLE WEBSITE · CLIENT CONTENT REQUIRED</text>
-</svg>

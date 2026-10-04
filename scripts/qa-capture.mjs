@@ -107,11 +107,11 @@ try {
   if (captureMode === 'full') {
     const pageHeight = await send('Runtime.evaluate', { expression: 'document.documentElement.scrollHeight', returnByValue: true });
     for (let y = 0; y < pageHeight.result.value; y += Math.round(height * 0.72)) {
-      await send('Runtime.evaluate', { expression: `scrollTo(0, ${y})` });
+      await send('Runtime.evaluate', { expression: `scrollTo({top: ${y}, behavior: 'instant'})` });
       await delay(180);
     }
-    await send('Runtime.evaluate', { expression: 'scrollTo(0, 0)' });
-    await delay(700);
+    await send('Runtime.evaluate', { expression: "scrollTo({top: 0, behavior: 'instant'}); document.activeElement?.blur()" });
+    await delay(1200);
   }
   if (captureMode === 'menu') {
     await send('Runtime.evaluate', { expression: `document.querySelector('.menu-toggle')?.click()` });
@@ -133,7 +133,7 @@ try {
       scrollWidth: document.documentElement.scrollWidth,
       scrollHeight: document.documentElement.scrollHeight,
       introPending: document.documentElement.classList.contains('al-intro-pending'),
-      introVisibility: getComputedStyle(document.querySelector('[data-cinematic-intro]')).visibility,
+      introVisibility: document.querySelector('[data-cinematic-intro]') ? getComputedStyle(document.querySelector('[data-cinematic-intro]')).visibility : 'absent',
       heading: document.querySelector('h1')?.innerText,
       criticalImagesComplete: [...document.images].filter((image) => image.loading !== 'lazy').every((image) => image.complete && image.naturalWidth > 0),
       missingCriticalImages: [...document.images].filter((image) => image.loading !== 'lazy' && (!image.complete || image.naturalWidth === 0)).map((image) => image.src),
@@ -155,7 +155,7 @@ try {
     const replay = await send('Runtime.evaluate', {
       expression: `JSON.stringify({
         introPending: document.documentElement.classList.contains('al-intro-pending'),
-        introVisibility: getComputedStyle(document.querySelector('[data-cinematic-intro]')).visibility,
+        introVisibility: document.querySelector('[data-cinematic-intro]') ? getComputedStyle(document.querySelector('[data-cinematic-intro]')).visibility : 'absent',
         introSeen: sessionStorage.getItem('al-intro-seen')
       })`,
       returnByValue: true,

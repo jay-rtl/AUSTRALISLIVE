@@ -1,0 +1,34 @@
+---
+import type { Show } from '../data/shows';
+import { referenceSite, referenceFacebook, tourTickets } from '../data/shows';
+import { withBase } from '../utils/paths';
+import '../styles/shows.css';
+interface Props { show: Show; past?: boolean; }
+const { show, past = false } = Astro.props;
+---
+<article class:list={['show-feature', { 'show-feature--past': past }]} id={show.id}>
+  <figure class="show-feature__art">
+    <a href={withBase(show.image)} aria-label={`View the full ${show.title} artwork`}>
+      <img src={withBase(show.image)} width={show.imageWidth} height={show.imageHeight} alt={show.imageAlt} loading="lazy" decoding="async" />
+    </a>
+    <figcaption>Official tour artwork · <a href={show.sourceUrl}>Source ↗</a></figcaption>
+  </figure>
+  <div class="show-feature__content">
+    <p class="eyebrow">{show.status} <span aria-hidden="true"> / </span> 2026</p>
+    <h2>{show.title}</h2>
+    <p class="show-feature__artist">{show.artist}</p>
+    <p class="show-feature__subtitle">{show.subtitle}</p>
+    <p class="show-feature__description">{show.description}</p>
+    <ul class="tour-dates" aria-label={`${show.title} tour dates`}>
+      {show.dates.map((date) => <li>
+        <time datetime={date.date}><span>{date.month}</span><strong>{date.day}</strong></time>
+        <span class="tour-dates__city">{date.city}</span>
+        {past ? <span class="tour-dates__status">Past show</span> : date.ticketUrl
+          ? <a href={date.ticketUrl} aria-label={`Tickets for ${show.title} in ${date.city}`}>Tickets <span aria-hidden="true">↗</span></a>
+          : <a href={referenceSite} aria-label={`${show.title} ${date.city} updates at Strictly Epic Studio`}>Updates <span aria-hidden="true">↗</span></a>}
+      </li>)}
+    </ul>
+    <a class="show-feature__action" href={past ? referenceFacebook : tourTickets}>{past ? 'More from the tour · Strictly Epic Studio' : 'Explore tickets on Humanitix'} <span aria-hidden="true">↗</span></a>
+    {!past && <p class="show-feature__note">Noel Palomo and Miniong Cervantes appear with Repakol Band. This is not a Siakol reunion performance.</p>}
+  </div>
+</article>

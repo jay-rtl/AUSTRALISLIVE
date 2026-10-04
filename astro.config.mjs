@@ -1,8 +1,8 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
-const site = process.env.PUBLIC_SITE_URL || 'https://example.github.io';
-const rawBase = process.env.PUBLIC_BASE_PATH || '/monsterminds';
+const site = process.env.PUBLIC_SITE_URL || 'https://jay-rtl.github.io';
+const rawBase = process.env.PUBLIC_BASE_PATH || '/AUSTRALISLIVE';
 const base = rawBase === '/' ? '/' : `/${rawBase.replace(/^\/+|\/+$/g, '')}`;
 
 export default defineConfig({

@@ -1,20 +1,15 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
-import PlaceholderSection from '../components/PlaceholderSection.astro';
+import ArrowLink from '../components/ArrowLink.astro';
+import '../styles/shows.css';
 ---
-
-<BaseLayout
-  title="About — AUSTRALIS LIVE Demo"
-  description="About page framework for the AUSTRALIS LIVE sample website. Final company story and team content are required."
->
-  <PageHero
-    eyebrow="About · Sample"
-    title="The story is yours to tell."
-    intro="[CLIENT BRAND STORY REQUIRED] This page currently demonstrates the intended editorial hierarchy without inventing company history."
-  />
-  <PlaceholderSection
-    title="Story, philosophy, and approach"
-    text="Reserved for approved AUSTRALIS LIVE messaging, supporting visuals, creative philosophy, and team content."
-  />
+<BaseLayout title="About | Australis Live" description="AUSTRALIS LIVE - Entertainment and Management. Live moments, lasting memories.">
+  <PageHero eyebrow="AUSTRALIS LIVE" title="For the artists. For the audience." intro="Entertainment and Management - bringing creative ambition and live experiences together." />
+  <section class="show-page editorial-copy">
+    <p class="eyebrow">Our approach</p><h2>Make it mean something.</h2>
+    <p>A song that takes you back. A room filled with laughter. A moment shared with the people beside you. These are the experiences at the heart of AUSTRALIS LIVE.</p>
+    <p>Our focus is the connection between the stage and the audience, with care for the creative idea and the details that bring it to life.</p>
+    <ArrowLink href="/events/" label="Explore the shows" />
+  </section>
 </BaseLayout>

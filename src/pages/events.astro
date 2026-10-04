@@ -1,20 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
-import PlaceholderSection from '../components/PlaceholderSection.astro';
+import ShowFeature from '../components/ShowFeature.astro';
+import { nextShow } from '../data/shows';
 ---
-
-<BaseLayout
-  title="Events & Gallery — AUSTRALIS LIVE Demo"
-  description="Events and gallery page framework for the AUSTRALIS LIVE sample website. Final event media and information are required."
->
-  <PageHero
-    eyebrow="Events & Gallery · Sample"
-    title="Moments, composed with intention."
-    intro="[CLIENT EVENT CONTENT REQUIRED] No event names, counts, locations, or claims have been invented."
-  />
-  <PlaceholderSection
-    title="Editorial gallery system"
-    text="The asymmetric image composition and its restrained reveal animation are reserved for the visual design phase after real or approved demo media is selected."
-  />
+<BaseLayout title="Shows & Tickets | Australis Live" description="LAKAS TAMA with Repakol Band. Explore Australia and New Zealand tour dates and official ticket links." image={nextShow.image}>
+  <PageHero eyebrow="On the calendar" title="The next moment starts here." intro="Discover the tour, choose your city, and join us for a night of live music." />
+  <div class="show-page"><ShowFeature show={nextShow} /></div>
 </BaseLayout>

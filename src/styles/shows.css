@@ -1,0 +1,39 @@
+.show-section { padding-block: clamp(4rem, 8vw, 8rem); }
+.show-section__intro { margin-bottom: clamp(2rem, 4vw, 4rem); }
+.show-section__intro h2 { font-size: clamp(2.2rem, 4.5vw, 4.5rem); max-width: 18ch; }
+.show-feature { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1fr); gap: clamp(2rem, 6vw, 6rem); align-items: start; scroll-margin-top: 9rem; }
+.show-feature__art { margin: 0; background: #111; padding: clamp(.5rem, 1.3vw, 1rem); border: 1px solid var(--line); }
+.show-feature__art img { width: 100%; height: auto; object-fit: contain; }
+.show-feature__art figcaption { padding: 1rem .25rem .25rem; font-size: .7rem; color: var(--gray); }
+.show-feature__art a { text-underline-offset: .2em; }
+.show-feature__content { min-width: 0; }
+.show-feature__content h2 { font-size: clamp(2.5rem, 5vw, 5.5rem); letter-spacing: -.045em; line-height: 1; margin: 0 0 .75rem; }
+.show-feature__artist { font: italic clamp(1.6rem, 3vw, 2.7rem)/1.2 Georgia, serif; color: var(--gold-soft); margin-bottom: 1rem; }
+.show-feature__subtitle { font-size: .8rem; letter-spacing: .09em; text-transform: uppercase; margin-bottom: 1.5rem; }
+.show-feature__description { color: var(--gray); max-width: 44ch; margin-bottom: 2rem; }
+.tour-dates { list-style: none; padding: 0; margin: 0 0 1.75rem; border-top: 1px solid var(--line); }
+.tour-dates li { display: grid; grid-template-columns: 3.25rem minmax(0, 1fr) auto; gap: clamp(.8rem, 2vw, 1.75rem); align-items: center; border-bottom: 1px solid var(--line); padding: 1rem .25rem; min-height: 5.5rem; }
+.tour-dates time { display: flex; flex-direction: column; text-align: center; line-height: 1; gap: .35rem; font-variant-numeric: tabular-nums; }
+.tour-dates time span { text-transform: uppercase; font-size: .65rem; letter-spacing: .1em; color: var(--gold-soft); }
+.tour-dates time strong { font-size: 1.8rem; font-weight: 400; }
+.tour-dates__city { font-size: clamp(1rem, 1.8vw, 1.45rem); }
+.tour-dates a { display: flex; align-items: center; gap: .5rem; min-height: 44px; font-size: .7rem; color: var(--gold-soft); text-transform: uppercase; letter-spacing: .06em; }
+.tour-dates__status { color: var(--gray); font-size: .66rem; }
+.show-feature__action { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 1.2rem; border: 1px solid var(--gold); color: var(--gold-soft); font-size: .75rem; line-height: 1.5; letter-spacing: .06em; }
+.show-feature__action:hover { background: var(--gold); color: var(--black); }
+.show-feature__note { color: var(--gray); font-size: .72rem; margin: 1rem 0 0; max-width: 54ch; }
+.show-feature--past { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); }
+.show-page { width: min(calc(100% - 2 * clamp(1rem, 4vw, 5rem)), 90rem); margin: 0 auto; padding-bottom: 6rem; }
+.show-page > .show-feature + .show-feature { margin-top: clamp(5rem, 10vw, 10rem); }
+.editorial-copy { max-width: 48rem; margin-inline: auto; }
+.editorial-copy h2 { margin-bottom: 1.5rem; }
+.editorial-copy p { color: var(--gray); font-size: 1.1rem; }
+.contact-card { padding: clamp(1.5rem, 4vw, 3rem); border: 1px solid var(--line); max-width: 48rem; margin: 0 auto 2rem; }
+.contact-card h2 { font-size: clamp(1.8rem, 4vw, 3rem); }
+.contact-card a { color: var(--gold-soft); text-decoration: underline; text-underline-offset: .25em; overflow-wrap: anywhere; }
+@media (max-width: 767px) {
+  .show-feature, .show-feature--past { grid-template-columns: minmax(0, 1fr); }
+  .show-feature__art { max-width: 30rem; width: 100%; margin-inline: auto; }
+  .show-feature__content h2 { font-size: clamp(2.5rem, 10vw, 4rem); }
+  .tour-dates li { grid-template-columns: 2.75rem minmax(0, 1fr) auto; }
+}

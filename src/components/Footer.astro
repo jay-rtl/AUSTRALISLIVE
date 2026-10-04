@@ -11,7 +11,7 @@ const year = new Date().getFullYear();
 <footer class="site-footer">
   <div class="footer-brand">
     <img src={withBase(siteConfig.logoPath)} alt="" width="1254" height="1254" loading="lazy" />
-    <p>{siteConfig.demoNotice}</p>
+    <p>{siteConfig.tagline}</p>
   </div>
 
   <div class="footer-column">
@@ -22,16 +22,17 @@ const year = new Date().getFullYear();
   </div>
 
   <div class="footer-column">
-    <p class="eyebrow">Contact</p>
-    <p>{contact.email}</p>
-    <p>{contact.phone}</p>
+    <p class="eyebrow">Stay connected</p>
+    {contact.email && <p><a href={`mailto:${contact.email}`}>{contact.email}</a></p>}
+    <p><a href={withBase('/events/')}>Shows & tickets ↗</a></p>
+    <p><a href={withBase('/contact/')}>Ticket enquiries ↗</a></p>
     {socials.length > 0 && <ul>{socials.map((social) => <li><a href={social.url}>{social.label}</a></li>)}</ul>}
   </div>
 
   <div class="footer-meta">
-    <p>© {year} AUSTRALIS LIVE. Demo website.</p>
-    <nav aria-label="Legal">
+    <p>© {year} AUSTRALIS LIVE. All rights reserved.</p>
+    {legalNavigation.length > 0 && <nav aria-label="Legal">
       {legalNavigation.map((item) => <a href={withBase(item.href)}>{item.label}</a>)}
-    </nav>
+    </nav>}
   </div>
 </footer>

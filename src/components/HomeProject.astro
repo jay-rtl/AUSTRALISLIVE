@@ -14,7 +14,7 @@ const { project, index } = Astro.props;
   <a class="home-project__media" href={withBase(`/portfolio/${project.slug}/`)} aria-label={`View ${project.title}`}>
     <img
       src={withBase(project.coverImage)}
-      alt={`Conceptual demo visual for ${project.title}`}
+      alt={`Official artwork for ${project.title}`}
       width={index === 0 ? 1000 : 1536}
       height={index === 0 ? 1500 : 1024}
       loading="lazy"

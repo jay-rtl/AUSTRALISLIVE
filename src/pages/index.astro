@@ -1,28 +1,25 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ArrowLink from '../components/ArrowLink.astro';
-import HomeProject from '../components/HomeProject.astro';
+import ShowFeature from '../components/ShowFeature.astro';
+import { nextShow, previousShow } from '../data/shows';
 import SectionHeading from '../components/SectionHeading.astro';
 import { siteConfig, homeCopy } from '../config/site';
-import { projects } from '../data/projects';
 import { services } from '../data/services';
 import { withBase } from '../utils/paths';
 import '../styles/home.css';
 
-const featuredProjects = [...projects].sort((a, b) => a.order - b.order).slice(0, 3);
 const isDev = import.meta.env.DEV;
 const media = {
-  hero: withBase('/images/demo/homepage/hero-stage.webp'),
-  material: withBase('/images/demo/homepage/material-study.webp'),
-  event: withBase('/images/demo/homepage/event-environment.webp'),
-  studio: withBase('/images/demo/homepage/studio-team.webp'),
+  hero: withBase('/images/atmosphere/hero-stage.webp'),
+  material: withBase('/images/atmosphere/material-study.webp'),
 };
 ---
 
 <BaseLayout
   title={siteConfig.defaultTitle}
   description={siteConfig.defaultDescription}
-  image="/images/demo/homepage/hero-stage.webp"
+  image="/images/atmosphere/hero-stage.webp"
 >
   <Fragment slot="head">
     <link rel="preload" href={withBase(siteConfig.logoPath)} as="image" type="image/png" />
@@ -59,14 +56,13 @@ const media = {
       <div class="cinematic-hero__media" data-hero-media>
         <img
           src={media.hero}
-          alt="Conceptual demo image of a sculptural event stage illuminated in warm gold light"
+          alt=""
           width="1536"
           height="1024"
           fetchpriority="high"
           decoding="async"
         />
         <div class="cinematic-hero__veil"></div>
-        <p class="cinematic-hero__caption">Concept visual · Demo media</p>
       </div>
 
       <div class="cinematic-hero__copy">
@@ -78,8 +74,8 @@ const media = {
           {homeCopy.summary}
         </p>
         <div class="hero-actions">
-          <ArrowLink href="/portfolio/" label={homeCopy.workCta} variant="filled" />
-          <ArrowLink href="/contact/" label={homeCopy.inquiryCta} variant="text" />
+          <ArrowLink href="/events/" label={homeCopy.workCta} variant="filled" />
+          <ArrowLink href="/events/#lakas-tama" label={homeCopy.inquiryCta} variant="text" />
         </div>
       </div>
 
@@ -106,7 +102,7 @@ const media = {
           We bring space, story, and feeling into one carefully composed experience.
         </h2>
         <p data-reveal>
-          This concept copy demonstrates the intended brand voice. Final positioning and approved service language will replace it without changing the design system.
+          From the first note to the final curtain, every detail is an invitation to feel part of something. Entertainment with energy, intention and a human connection.
         </p>
       </div>
     </section>
@@ -119,34 +115,25 @@ const media = {
             <a class="service-row" href={withBase('/services/')} data-service-row data-index={index}>
               <span class="service-row__number">{String(index + 1).padStart(2, '0')}</span>
               <span class="service-row__title">{service.title}</span>
-              <span class="service-row__description">Concept service category</span>
+              <span class="service-row__description">Entertainment & production</span>
               <svg viewBox="0 0 32 16" aria-hidden="true"><path d="M1 8h27M21 1l7 7-7 7" /></svg>
             </a>
           ))}
         </div>
         <figure class="services-preview" data-service-preview data-reveal>
           <div class="services-preview__frame">
-            <img src={media.material} alt="Conceptual translucent fabric installation in warm studio light" width="1000" height="1500" loading="lazy" decoding="async" />
+            <img src={media.material} alt="Sculptural fabric and warm light" width="1000" height="1500" loading="lazy" decoding="async" />
           </div>
           <figcaption>Material, light, atmosphere.</figcaption>
         </figure>
       </div>
     </section>
 
-    <section class="featured-work" aria-labelledby="work-title">
-      <SectionHeading number="02" label="Selected Work" title="Concept studies for stories still to be told." titleId="work-title" />
-      <p class="featured-work__notice" data-reveal>All projects shown are demo studies for layout presentation.</p>
-      <div class="featured-work__grid">
-        {featuredProjects.map((project, index) => <HomeProject project={project} index={index} />)}
-      </div>
-      <div class="featured-work__link" data-reveal>
-        <ArrowLink href="/portfolio/" label="View all concept projects" variant="outline" />
-      </div>
-    </section>
+    <section class="show-section" aria-label="Next show"><ShowFeature show={nextShow} /></section>
 
     <section class="visual-story" aria-label="Creative approach">
       <div class="visual-story__media" data-story-media>
-        <img src={media.hero} alt="Conceptual illuminated production environment" width="1536" height="1024" loading="lazy" decoding="async" />
+        <img src={media.hero} alt="" width="1536" height="1024" loading="lazy" decoding="async" />
       </div>
       <p class="visual-story__vertical" aria-hidden="true">AUSTRALIS LIVE · Creative Services</p>
       <div class="visual-story__copy" data-reveal>
@@ -156,42 +143,26 @@ const media = {
       </div>
     </section>
 
-    <section class="home-events" aria-labelledby="events-title">
-      <SectionHeading number="03" label="Events & Experiences" title="Designed to be felt in the room." titleId="events-title" />
-      <div class="events-composition">
-        <figure class="events-composition__main" data-reveal>
-          <div><img src={media.event} alt="Conceptual black-and-gold event environment before guests arrive" width="1536" height="1024" loading="lazy" decoding="async" /></div>
-          <figcaption><span>01</span> Environment study</figcaption>
-        </figure>
-        <figure class="events-composition__detail" data-reveal>
-          <div><img src={media.material} alt="Detail of a conceptual fabric and brass installation" width="1000" height="1500" loading="lazy" decoding="async" /></div>
-          <figcaption><span>02</span> Material study</figcaption>
-        </figure>
-        <div class="events-composition__copy" data-reveal>
-          <p>Demo imagery, art-directed as a cohesive visual system while approved event documentation is pending.</p>
-          <ArrowLink href="/events/" label="Explore experiences" variant="text" />
-        </div>
-      </div>
-    </section>
+    <section class="show-section" aria-label="Previous show"><ShowFeature show={previousShow} past /></section>
 
     <section class="about-teaser" aria-labelledby="about-title">
-      <div class="about-teaser__media" data-about-media>
-        <img src={media.studio} alt="Anonymous creative team collaborating around an illuminated set model" width="1600" height="800" loading="lazy" decoding="async" />
+      <div class="about-teaser__media about-teaser__brand">
+        <img src={withBase(siteConfig.logoPath)} alt={siteConfig.brandDisplayName} width="1254" height="1254" loading="lazy" decoding="async" />
       </div>
       <div class="about-teaser__copy" data-reveal>
         <p class="eyebrow">Behind every moment</p>
         <h2 id="about-title">Passionate minds.<br /><em>Purposeful creation.</em></h2>
         <p>
-          A temporary brand-story direction centered on close collaboration, considered craft, and a shared respect for the smallest details.
+          For the artists. For the audience. For the moments that stay with us long after the lights go down.
         </p>
         <ArrowLink href="/about/" label="Discover the approach" variant="text" />
       </div>
     </section>
 
     <section class="final-cta" aria-labelledby="cta-title">
-      <p class="eyebrow" data-reveal>Have an idea in mind?</p>
-      <h2 id="cta-title" data-reveal>Let’s create something<br /><em>worth remembering.</em></h2>
-      <div data-reveal><ArrowLink href="/contact/" label="Start an inquiry" variant="outline" /></div>
+      <p class="eyebrow" data-reveal>Your next live experience</p>
+      <h2 id="cta-title" data-reveal>Be there for<br /><em>the next moment.</em></h2>
+      <div data-reveal><ArrowLink href="/events/" label="Find your show" variant="outline" /></div>
       <span class="final-cta__orb" aria-hidden="true"></span>
     </section>
   </div>

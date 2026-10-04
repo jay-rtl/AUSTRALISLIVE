@@ -1,33 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
-import { projects } from '../../data/projects';
-import { withBase } from '../../utils/paths';
-
-const sortedProjects = [...projects].sort((a, b) => a.order - b.order);
+import ShowFeature from '../../components/ShowFeature.astro';
+import { previousShow } from '../../data/shows';
 ---
-
-<BaseLayout
-  title="Portfolio — AUSTRALIS LIVE Demo"
-  description="Demo portfolio architecture for AUSTRALIS LIVE. Entries are placeholders and are not presented as real client work."
->
-  <PageHero
-    eyebrow="Portfolio · Demo projects"
-    title="A framework for work worth remembering."
-    intro="All entries are clearly marked samples used to test routing and the future editorial project system."
-  />
-  <section class="project-list" aria-labelledby="project-list-title">
-    <h2 class="sr-only" id="project-list-title">Demo projects</h2>
-    <ul>
-      {sortedProjects.map((project) => (
-        <li>
-          <a href={withBase(`/portfolio/${project.slug}/`)}>
-            <p class="project-meta">{project.category}</p>
-            <h2>{project.title}</h2>
-          </a>
-          <p>{project.shortDescription}</p>
-        </li>
-      ))}
-    </ul>
-  </section>
+<BaseLayout title="Previous Shows | Australis Live" description="A look back at Nurse Even's This is BULLSHIFT Australia tour." image={previousShow.image}>
+  <PageHero eyebrow="Previous shows" title="The moments stay with us." intro="A look back at the artists, cities and shared experiences of our previous shows." />
+  <div class="show-page"><ShowFeature show={previousShow} past /></div>
 </BaseLayout>
