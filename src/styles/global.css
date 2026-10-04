@@ -726,7 +726,7 @@ main {
 
 .footer-brand img { width: min(15rem, 70vw); height: auto; }
 /* Blend the original logo's black matte into the dark site surfaces. */
-.brand img,
+.brand,
 .footer-brand img,
 .about-teaser__brand img {
   mix-blend-mode: screen;
