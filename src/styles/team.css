@@ -1,0 +1,30 @@
+.our-team { width: min(calc(100% - 2 * clamp(1rem, 4vw, 5rem)), 90rem); margin-inline: auto; padding-bottom: var(--space-section); scroll-margin-top: 9rem; }
+.team-story { padding-block: clamp(3rem, 7vw, 7rem); }
+.team-story h2 { max-width: 23ch; font-size: clamp(2.4rem, 5vw, 5rem); line-height: 1.08; }
+.team-story h2 em { font-family: Georgia, serif; color: var(--gold-soft); font-weight: 400; }
+.team-story__text { max-width: 48rem; margin-left: auto; }
+.our-team p:not(.eyebrow, .team-review-note) { color: #c4c4c4; font-size: clamp(1rem, 1.3vw, 1.12rem); line-height: 1.8; }
+.team-review-note { color: var(--gold-soft); border-left: 2px solid var(--gold); padding: .75rem 1rem; }
+.team-profile { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 2rem clamp(2rem, 6vw, 6rem); padding-bottom: clamp(4rem, 9vw, 9rem); }
+.team-divider { grid-column: 1 / -1; height: 1px; background: var(--line); transform-origin: left; margin-bottom: 2rem; }
+.team-portrait { margin: 0; overflow: hidden; aspect-ratio: 4 / 5; align-self: start; }
+.team-portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; }
+.team-profile__copy { min-width: 0; padding-top: 1rem; }
+.team-profile h3 { font-size: clamp(3.5rem, 7vw, 6.5rem); margin: 0 0 2rem; }
+.team-profile h3 span { color: var(--gold-soft); }
+.team-profile--reverse .team-portrait { grid-column: 2; grid-row: 2; }
+.team-profile--reverse .team-profile__copy { grid-column: 1; grid-row: 2; }
+.team-closing { max-width: 68rem; margin-inline: auto; }
+.team-closing h2 { max-width: 20ch; line-height: 1.1; }
+.team-closing__text { max-width: 46rem; }
+.team-closing blockquote { margin: clamp(3rem, 7vw, 6rem) 0 0; max-width: 28ch; color: var(--gold-soft); font: italic clamp(1.8rem, 3.8vw, 3.5rem)/1.4 Georgia, serif; }
+.team-jump { margin-block: -2rem 4rem; }
+.team-jump a { display: inline-flex; align-items: center; min-height: 44px; color: var(--gold-soft); text-decoration: underline; text-underline-offset: .3em; }
+@media (max-width: 899px) {
+  .team-profile { grid-template-columns: minmax(0, 1fr); }
+  .team-profile--reverse .team-portrait, .team-profile--reverse .team-profile__copy { grid-column: auto; grid-row: auto; }
+  .team-portrait { aspect-ratio: 4 / 3; }
+  .team-story__text { margin-left: 0; }
+  .team-divider { margin-bottom: .5rem; }
+}
+@media (prefers-reduced-motion: reduce) { html:has(.our-team) { scroll-behavior: auto; } }

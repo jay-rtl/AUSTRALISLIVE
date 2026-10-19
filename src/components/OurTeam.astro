@@ -1,0 +1,41 @@
+---
+import { team } from '../data/team';
+import { withBase } from '../utils/paths';
+import '../styles/team.css';
+---
+<section class="our-team" id="our-team" aria-labelledby="team-title">
+  <header class="team-story" data-team-reveal>
+    <p class="eyebrow">Our team</p>
+    <h2 id="team-title">Built on Friendship.<br /><em>Driven by Passion.</em></h2>
+    <div class="team-story__text">{team.story.map(text => <p>{text}</p>)}</div>
+  </header>
+  {!team.portraitsConfirmed && <p class="team-review-note">Preview only: portrait assignments are awaiting confirmation.</p>}
+  {team.profiles.map((person, index) => (
+    <article class:list={['team-profile', { 'team-profile--reverse': index % 2 === 1 }]} aria-labelledby={`${person.id}-name`}>
+      <div class="team-divider" aria-hidden="true" data-team-line></div>
+      <figure class="team-portrait" data-team-portrait>
+        <img src={withBase(`/images/team/${person.portrait}-1200.webp`)}
+          srcset={`${withBase(`/images/team/${person.portrait}-640.webp`)} 640w, ${withBase(`/images/team/${person.portrait}-1200.webp`)} 1200w`}
+          sizes="(min-width: 900px) 45vw, 100vw" width="1448" height="1086"
+          alt={team.portraitsConfirmed ? `${person.name}, AUSTRALIS LIVE partner` : 'Supplied partner portrait; identity assignment awaiting confirmation'}
+          loading="lazy" decoding="async" />
+      </figure>
+      <div class="team-profile__copy" data-team-reveal>
+        <p class="eyebrow">{person.journey}</p>
+        <h3 id={`${person.id}-name`}>{person.name}<span aria-hidden="true">.</span></h3>
+        {person.paragraphs.map(text => <p>{text}</p>)}
+      </div>
+    </article>
+  ))}
+  <section class="team-closing" aria-labelledby="partnership-title" data-team-reveal>
+    <div class="team-divider" aria-hidden="true" data-team-line></div>
+    <p class="eyebrow">A shared vision</p>
+    <h2 id="partnership-title">{team.closingHeading}</h2>
+    <div class="team-closing__text">{team.closing.map(text => <p>{text}</p>)}</div>
+    <blockquote>{team.quote}</blockquote>
+  </section>
+</section>
+<script>
+  import { initTeamMotion } from '../scripts/animations/team';
+  initTeamMotion();
+</script>

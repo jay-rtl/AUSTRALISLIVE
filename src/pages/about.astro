@@ -2,14 +2,17 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import ArrowLink from '../components/ArrowLink.astro';
+import OurTeam from '../components/OurTeam.astro';
 import '../styles/shows.css';
 ---
-<BaseLayout title="About | Australis Live" description="AUSTRALIS LIVE - Entertainment and Management. Live moments, lasting memories.">
+<BaseLayout title="About & Our Team | Australis Live" description="Meet Arvin and Marc: the friendship, production experience and creative partnership behind AUSTRALIS LIVE.">
   <PageHero eyebrow="AUSTRALIS LIVE" title="For the artists. For the audience." intro="Entertainment and Management - bringing creative ambition and live experiences together." />
+  <nav class="show-page team-jump" aria-label="About this page"><a href="#our-team">Meet our team ↓</a></nav>
   <section class="show-page editorial-copy">
     <p class="eyebrow">Our approach</p><h2>Make it mean something.</h2>
     <p>A song that takes you back. A room filled with laughter. A moment shared with the people beside you. These are the experiences at the heart of AUSTRALIS LIVE.</p>
     <p>Our focus is the connection between the stage and the audience, with care for the creative idea and the details that bring it to life.</p>
     <ArrowLink href="/events/" label="Explore the shows" />
   </section>
+  <OurTeam />
 </BaseLayout>
