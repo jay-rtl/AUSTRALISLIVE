@@ -6,7 +6,9 @@ import OurTeam from '../components/OurTeam.astro';
 import '../styles/shows.css';
 ---
 <BaseLayout title="About & Our Team | Australis Live" description="Meet Arvin and Marc: the friendship, production experience and creative partnership behind AUSTRALIS LIVE.">
-  <PageHero eyebrow="AUSTRALIS LIVE" title="For the artists. For the audience." intro="Entertainment and Management - bringing creative ambition and live experiences together." />
+  <div class="about-intro">
+    <PageHero eyebrow="AUSTRALIS LIVE" title="For the artists. For the audience." intro="Entertainment and Management - bringing creative ambition and live experiences together." />
+  </div>
   <nav class="show-page team-jump" aria-label="About this page"><a href="#our-team">Meet our team ↓</a></nav>
   <section class="show-page editorial-copy">
     <p class="eyebrow">Our approach</p><h2>Make it mean something.</h2>
@@ -16,3 +18,16 @@ import '../styles/shows.css';
   </section>
   <OurTeam />
 </BaseLayout>
+
+<style>
+  @media (max-width: 899px) {
+    .about-intro :global(.page-hero) {
+      min-height: 0;
+      padding-top: calc(8.5rem + env(safe-area-inset-top, 0px));
+      padding-bottom: 1rem;
+    }
+    .about-intro :global(h1) { margin-bottom: 1.5rem; }
+    .about-intro :global(.page-intro) { margin-bottom: 0; }
+    .team-jump { margin-block: 0 3.5rem; padding-bottom: 0; }
+  }
+</style>
