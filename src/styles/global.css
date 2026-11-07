@@ -659,20 +659,20 @@ main {
   z-index: 1;
   top: calc(1rem + env(safe-area-inset-top, 0px));
   right: max(1.25rem, env(safe-area-inset-right, 0px));
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  min-height: 48px;
-  padding: 0.5rem 0.8rem;
-  border: 1px solid var(--line);
-  background: var(--black);
-  color: var(--white);
-  font: inherit;
-  font-size: 0.85rem;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--gold-soft);
   cursor: pointer;
 }
 
-.menu-close span { font-size: 1.8rem; line-height: 1; }
+.menu-close svg { stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; }
+.menu-close:hover { background: var(--charcoal); color: var(--white); }
 .menu-close:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
 .mobile-menu nav a { min-height: 44px; font-size: clamp(1.6rem, 6.8vw, 2.5rem); }
 
