@@ -7,7 +7,7 @@ export const siteConfig = {
   defaultDescription:
     'AUSTRALIS LIVE — Entertainment and Management. Live entertainment, touring shows and creative production.',
   defaultOgImage: '/images/brand/australis-live-logo.png',
-  logoPath: '/images/brand/australis-live-logo.png',
+  logoPath: '/images/brand/australis-live-logo-transparent.png',
   locale: 'en',
   tagline: 'Live moments. Lasting memories.',
 } as const;
@@ -15,7 +15,7 @@ export const siteConfig = {
 // Centralized homepage copy.
 export const homeCopy = {
   eyebrow: 'Entertainment · Management · Live experiences',
-  headline: ['Creating moments', 'that move people.'],
+  headline: ['Creating moments', 'that inspire people.'],
   summary: 'Entertainment, creative production and live experiences — brought together with intention, atmosphere and energy.',
   workCta: 'Explore the shows',
   inquiryCta: 'Lakas Tama tour',

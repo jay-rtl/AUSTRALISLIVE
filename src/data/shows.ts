@@ -19,8 +19,6 @@ export const nextShow: Show = {
   imageAlt: 'Official Lakas Tama Australia and New Zealand Tour 2026 poster featuring Repakol Band',
   sourceUrl: referenceSite,
   dates: [
-    { month: 'Nov', day: '21', city: 'Christchurch', date: '2026-11-21' },
-    { month: 'Nov', day: '22', city: 'Auckland', date: '2026-11-22' },
     { month: 'Nov', day: '27', city: 'Perth', date: '2026-11-27', ticketUrl: 'https://events.humanitix.com/lakas-tama-aus-and-nz-tour-2026-perth' },
     { month: 'Nov', day: '29', city: 'Melbourne', date: '2026-11-29', ticketUrl: 'https://events.humanitix.com/lakas-tama-aus-and-nz-tour-2026-melbourne' },
     { month: 'Dec', day: '04', city: 'Sydney', date: '2026-12-04', ticketUrl: 'https://events.humanitix.com/lakas-tama-aus-and-nz-tour-2026-sydney' },
