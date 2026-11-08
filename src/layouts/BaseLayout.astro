@@ -5,6 +5,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import SEOHead from '../components/SEOHead.astro';
 import '../styles/global.css';
+import '../styles/editorial.css';
 
 interface Props {
   title?: string;
@@ -34,5 +35,10 @@ const { title, description, image, noindex } = Astro.props;
       <slot />
     </main>
     <Footer />
+    <script>
+      if (document.querySelector('.show-feature__art, .service-list li')) {
+        import('../scripts/animations/editorial').then(({ initEditorialMotion }) => initEditorialMotion());
+      }
+    </script>
   </body>
 </html>
