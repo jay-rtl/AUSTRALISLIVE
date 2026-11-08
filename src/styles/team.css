@@ -2,7 +2,7 @@
 .team-story { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 5rem; padding-block: 3rem var(--space-section); border-top: 1px solid var(--line); }
 .team-story > .eyebrow { grid-column: 1 / -1; }
 .team-story h2 { font-size: clamp(2.5rem,4.4vw,4.5rem); line-height: 1.08; }
-.team-story h2 em { font-family: var(--display); font-style: normal; color: var(--gold-soft); font-weight: 600; }
+.team-story h2 em { font-family: var(--display); font-style: italic; color: var(--gold-soft); font-weight: 400; }
 .team-story__text { max-width: 48rem; }
 .our-team p:not(.eyebrow,.team-review-note) { color: #c4c4c4; font-size: clamp(1rem,1.2vw,1.1rem); line-height: 1.85; }
 .team-review-note { color: var(--gold-soft); border-left: 2px solid var(--gold); padding: .75rem 1rem; }
@@ -11,7 +11,7 @@
 .team-portrait { margin: 0; overflow: hidden; aspect-ratio: 4 / 5; align-self: start; position: sticky; top: 8rem; }
 .team-portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; }
 .team-profile__copy { min-width: 0; padding-top: 1rem; }
-.team-profile h3 { font: 600 clamp(4rem,7.5vw,7.5rem)/1 var(--display); letter-spacing: -.07em; margin: 0 0 2rem; }
+.team-profile h3 { font: 400 clamp(4.5rem,8vw,8rem)/1 var(--display); letter-spacing: -.035em; margin: 0 0 2rem; }
 .team-profile h3 span { color: var(--gold-soft); }
 .team-profile--reverse { grid-template-columns: minmax(0,1fr) minmax(0,.9fr); }
 .team-profile--reverse .team-portrait { grid-column: 2; grid-row: 2; }
@@ -20,7 +20,7 @@
 .team-closing > .eyebrow { grid-column: 1 / -1; }
 .team-closing h2 { max-width: 18ch; font-size: clamp(2.5rem,4.2vw,4.2rem); line-height: 1.08; }
 .team-closing__text { max-width: 46rem; }
-.team-closing blockquote { grid-column: 1 / -1; margin: 3rem auto 0; max-width: 38ch; color: var(--white); font: 500 clamp(1.8rem,3.1vw,3.2rem)/1.35 var(--display); letter-spacing: -.04em; border-left: 2px solid var(--gold); padding-left: 2rem; }
+.team-closing blockquote { grid-column: 1 / -1; margin: 3rem auto 0; max-width: 38ch; color: var(--white); font: 400 clamp(2rem,3.5vw,3.8rem)/1.2 var(--display); letter-spacing: -.04em; border-left: 2px solid var(--gold); padding-left: 2rem; }
 .team-jump a { display: inline-flex; align-items: center; min-height: 44px; color: var(--gold-soft); text-decoration: underline; text-underline-offset: .3em; }
 @media (max-width: 899px) {
  .team-story, .team-closing { display: block; }

@@ -8,7 +8,7 @@ import '../styles/shows.css';
 <BaseLayout title="Enquiries | Australis Live" description="Find official ticket information and event support for AUSTRALIS LIVE shows.">
   <div class="contact-layout">
   <PageHero variant="contact" eyebrow="Enquiries" title="Let's get you to the show." intro="For tickets and event-specific questions, start with the official listing for your city." />
-  <div class="show-page">
+  <div class="show-page luxury-glass">
     {contact.email && <section class="contact-card"><p class="eyebrow">AUSTRALIS LIVE</p><h2>Get in touch.</h2><p>For entertainment, management and production enquiries.</p><a href={'mailto:' + contact.email}>{contact.email}</a></section>}
     <section class="contact-card"><p class="eyebrow">Tickets & event support</p><h2>Choose your city.</h2><p>Open the event listing for ticket options, venue information and the organizer's contact channel. Ticket purchases take place on Humanitix.</p><a href={tourTickets}>View official ticket listings &#8599;</a></section>
     <section class="contact-card"><p class="eyebrow">Tour updates</p><h2>Stay in the loop.</h2><p>Visit Strictly Epic Studio for the latest LAKAS TAMA tour announcements.</p><a href={referenceSite}>Visit Strictly Epic Studio &#8599;</a></section>

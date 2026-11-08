@@ -1,7 +1,8 @@
-﻿/* Modern entertainment system: existing identity, contemporary typography. */
+﻿/* Luxury editorial system: Instrument Serif display, Manrope interface. */
 :root {
- --display: 'Manrope', 'Segoe UI', sans-serif;
- --body: 'Instrument Sans', 'Segoe UI', sans-serif;
+ --display: 'Instrument Serif', Georgia, serif;
+ --sans: 'Manrope', 'Segoe UI', sans-serif;
+ --body: var(--sans);
  --gutter: clamp(1.25rem, 5vw, 5.5rem);
  --content: min(calc(100% - var(--gutter) * 2), 88rem);
  --space-section: clamp(4.5rem, 7vw, 7.5rem);
@@ -9,11 +10,13 @@
 }
 html { scroll-padding-top: 7rem; }
 body { font-family: var(--body); line-height: 1.65; }
-h1,h2,h3 { font-family: var(--display); font-weight: 600; letter-spacing: -.055em; line-height: 1.06; text-wrap: balance; }
+h1,h2,h3 { font-family: var(--sans); font-weight: 500; letter-spacing: -.04em; line-height: 1.1; text-wrap: balance; }
+h1 { font-family: var(--display); font-weight: 400; letter-spacing: -.025em; line-height: 1.02; }
 em { font-style: normal; }
+.statement-title,.section-heading h2,.visual-story__copy h2,.about-teaser__copy h2,.final-cta h2,.editorial-copy h2,.team-story h2,.team-closing h2,.contact-card h2 { font-family: var(--display); font-weight: 400; letter-spacing: -.025em; line-height: 1.08; }
 .eyebrow { font-size: .72rem; font-weight: 500; letter-spacing: .13em; color: var(--gold-soft); }
-.site-header { min-height: 6rem; padding-inline: var(--gutter); background: var(--black); border-bottom: 1px solid rgba(230,199,106,.14); transition: background .3s, min-height .3s, border-color .3s; }
-.site-header.is-scrolled { background: rgba(8,8,8,.98); border-color: var(--line); backdrop-filter: none; }
+.site-header { min-height: 6rem; padding-inline: var(--gutter); border: 1px solid var(--line); transition: background .3s, min-height .3s, border-color .3s; }
+.site-header.is-scrolled { border-color: rgba(230,199,106,.26); }
 .site-header::after { display: none; }
 .brand { width: 6rem; }
 .desktop-navigation ul { justify-content: flex-end; gap: clamp(1rem,2vw,2rem); }
@@ -21,9 +24,9 @@ em { font-style: normal; }
 .header-cta { min-height: 44px; align-items: center; padding: .5rem 1.2rem; border: 1px solid var(--gold); border-radius: 3rem; color: var(--gold-soft); }
 .header-cta:hover { background: var(--gold); color: var(--black); }
 .mobile-menu__main { align-content: start; padding-block: 1rem; gap: 2rem; }
-.mobile-menu nav a { font-family: var(--display); font-size: clamp(2rem,8vw,3.5rem); line-height: 1.2; letter-spacing: -.04em; }
+.mobile-menu nav a { font-family: var(--sans); font-size: clamp(2rem,8vw,3.5rem); line-height: 1.2; letter-spacing: -.04em; }
 .mobile-menu__footer { font-size: .68rem; letter-spacing: .06em; }
-.mobile-menu .mobile-menu__cta { font-size: .85rem; letter-spacing: 0; text-transform: none; border-radius: .4rem; }
+.mobile-menu .mobile-menu__cta { font-family: var(--sans); font-size: .85rem; letter-spacing: 0; text-transform: none; border-radius: .4rem; }
 .page-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 0 4rem; min-height: 0; padding-block: 10rem 4rem; }
 .page-hero > .eyebrow { grid-column: 1 / -1; margin-bottom: 2rem; }
 .page-hero h1 { grid-column: 1 / -1; max-width: 17ch; font-size: clamp(3rem,6vw,6.1rem); margin-bottom: 2rem; }
@@ -55,7 +58,7 @@ em { font-style: normal; }
 .team-jump { width: var(--content); margin: -2rem auto 3rem; padding: 0; }
 .service-list { margin: 0; counter-reset: discipline; }
 .service-list li { grid-template-columns: .22fr 1fr .7fr; align-items: start; gap: 3rem; padding: clamp(2rem,4vw,4rem) 0; border-color: var(--line); counter-increment: discipline; }
-.service-list li::before { content: counter(discipline,decimal-leading-zero); font: 500 clamp(2rem,5vw,4.8rem)/1 var(--display); color: var(--gold-soft); letter-spacing: -.06em; }
+.service-list li::before { content: counter(discipline,decimal-leading-zero); font: 500 clamp(2rem,5vw,4.8rem)/1 var(--sans); color: var(--gold-soft); letter-spacing: -.06em; }
 .service-list h2 { display: flex; align-items: start; gap: 1.25rem; font-size: clamp(2rem,3.2vw,3.4rem); max-width: 15ch; transition: color .3s, transform .3s; }
 .service-list h2 .service-icon { width: 1.75rem; height: 1.75rem; margin-top: .25rem; flex-shrink: 0; }
 .service-icon { color: var(--gold-soft); }

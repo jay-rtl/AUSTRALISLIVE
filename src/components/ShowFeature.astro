@@ -13,7 +13,7 @@ const { show, past = false } = Astro.props;
     </a>
     <figcaption>Official tour artwork · <a href={show.sourceUrl}>Source ↗</a></figcaption>
   </figure>
-  <div class="show-feature__content">
+  <div class:list={['show-feature__content', { 'luxury-glass': !past, 'glass-highlight': !past }]}>
     <p class="eyebrow">{show.status} <span aria-hidden="true"> / </span> 2026</p>
     <h2>{show.title}</h2>
     <p class="show-feature__artist">{show.artist}</p>

@@ -6,8 +6,8 @@
 .show-feature__art figcaption { padding-top: .8rem; font-size: .75rem; color: var(--gray); }
 .show-feature__art figcaption a { display: inline-block; padding: .4rem; text-decoration: underline; text-underline-offset: .25em; }
 .show-feature__content { min-width: 0; padding-top: 1.5rem; border-top: 1px solid var(--gold); }
-.show-feature__content h2 { font-size: clamp(3rem,4.8vw,5.1rem); line-height: .95; margin: 0 0 1rem; letter-spacing: -.055em; }
-.show-feature__artist { font: 500 clamp(1.5rem,2.5vw,2.5rem)/1.25 var(--display); letter-spacing: -.04em; color: var(--gold-soft); margin-bottom: 1rem; }
+.show-feature__content h2 { font-size: clamp(3rem,4.8vw,5.1rem); font-family: var(--sans); font-weight: 650; line-height: 1; margin: 0 0 1rem; letter-spacing: -.055em; }
+.show-feature__artist { font: 500 clamp(1.5rem,2.5vw,2.5rem)/1.25 var(--sans); letter-spacing: -.04em; color: var(--gold-soft); margin-bottom: 1rem; }
 .show-feature__subtitle { font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 1.5rem; }
 .show-feature__description { color: var(--gray); max-width: 44ch; margin-bottom: 2rem; }
 .tour-dates { list-style: none; padding: 0; margin: 0 0 1.5rem; border-top: 1px solid var(--line); }

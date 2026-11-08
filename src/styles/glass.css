@@ -1,0 +1,92 @@
+/* Smoked architectural glass, with opaque fallbacks before feature support. */
+:root {
+  --glass-fill: #111111;
+  --glass-tint: rgba(17, 17, 17, .84);
+  --glass-border: rgba(230, 199, 106, .2);
+  --glass-radius: 1.25rem;
+  --glass-blur: 18px;
+  --glass-shadow: 0 18px 48px rgba(0, 0, 0, .28);
+}
+.luxury-glass {
+  background: var(--glass-fill);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--glass-radius);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .045), var(--glass-shadow);
+}
+.glass-highlight { transition: border-color .3s ease, box-shadow .3s ease; }
+@media (hover: hover) {
+  .glass-highlight:hover { border-color: rgba(230, 199, 106, .42); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .075), 0 20px 50px rgba(0, 0, 0, .32); }
+}
+.site-header.luxury-glass {
+  top: max(.75rem, env(safe-area-inset-top, 0px));
+  left: clamp(.75rem, 2.5vw, 2.5rem);
+  width: calc(100% - clamp(.75rem, 2.5vw, 2.5rem) * 2);
+  min-height: 5.5rem;
+  padding: .2rem clamp(1rem, 2vw, 2rem);
+  border-radius: 1.4rem;
+  background: var(--glass-fill);
+}
+.site-header.is-scrolled { min-height: 5rem; }
+.site-header .brand { width: 5rem; }
+.site-header .desktop-navigation a { font-size: .8rem; font-weight: 450; }
+.site-header .header-cta { font-size: .8rem; border-color: rgba(230,199,106,.55); }
+.mobile-menu.luxury-glass {
+  inset: .75rem;
+  height: calc(100dvh - 1.5rem);
+  max-height: calc(100dvh - 1.5rem);
+  background: var(--glass-fill);
+  border-radius: 1.25rem;
+  padding-top: max(1.25rem, env(safe-area-inset-top, 0px));
+  flex-direction: column;
+}
+.mobile-menu.luxury-glass:not([hidden]) { display: flex; }
+.mobile-menu__controls { position: sticky; top: 0; z-index: 4; display: flex; justify-content: flex-end; flex: 0 0 auto; background: var(--glass-fill); border-radius: .6rem; }
+.mobile-menu__main { flex: 1 0 auto; }
+.mobile-menu__footer { flex: 0 0 auto; }
+.mobile-menu .menu-close { position: static; flex: 0 0 48px; }
+.hero-art-caption.luxury-glass { padding: .9rem 1.2rem; border: 1px solid var(--glass-border); border-radius: 1rem; }
+.show-feature__content.luxury-glass { padding: clamp(1.5rem, 3vw, 3rem); border: 1px solid var(--glass-border); }
+.show-feature__content.luxury-glass > .eyebrow { margin-bottom: 1.5rem; }
+.show-feature__content.luxury-glass .show-feature__action { padding: .9rem 1.1rem; border: 1px solid rgba(230,199,106,.52); border-radius: .7rem; min-height: 3.4rem; }
+.show-feature__content.luxury-glass .show-feature__action:hover { color: var(--black); background: var(--gold-soft); }
+.contact-layout > .show-page.luxury-glass { padding: clamp(1.5rem, 3vw, 3rem); }
+.contact-layout .contact-card:first-child { padding-top: 0; border-top: 0; }
+.contact-layout .contact-card:last-child { padding-bottom: 0; }
+.team-closing blockquote.luxury-glass { padding: clamp(1.75rem, 4vw, 4rem); border: 1px solid var(--glass-border); }
+.services-preview { position: relative; }
+.services-preview__frame { border-radius: 1rem; }
+.services-preview figcaption.luxury-glass { position: absolute; inset: auto .75rem .75rem; padding: .7rem .8rem; border-radius: .65rem; color: var(--white); }
+.service-row:hover { border-color: rgba(230,199,106,.5); }
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .luxury-glass, .site-header.luxury-glass {
+    background: var(--glass-tint);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(115%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(115%);
+  }
+  .site-header.is-scrolled { background: rgba(17,17,17,.9); }
+  .mobile-menu.luxury-glass { background: rgba(17,17,17,.94); }
+  body.menu-open .site-header.luxury-glass { -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+@media (max-width: 1000px) {
+  .site-header.luxury-glass { padding-inline: 1rem; }
+}
+@media (max-width: 767px) {
+  :root { --glass-blur: 8px; --glass-radius: 1rem; }
+  .site-header.luxury-glass { top: max(.5rem, env(safe-area-inset-top, 0px)); left: .75rem; width: calc(100% - 1.5rem); min-height: 4.75rem; border-radius: 1.1rem; }
+  .site-header .brand { width: 4.5rem; }
+  .show-feature__content.luxury-glass { padding: 1.5rem; }
+  .show-feature__content.luxury-glass .show-feature__note { font-size: .75rem; }
+  .hero-art-caption.luxury-glass { padding: .8rem 1rem; }
+  .team-closing blockquote.luxury-glass { margin-top: 2rem; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .luxury-glass, .site-header.luxury-glass, .site-header.is-scrolled, .mobile-menu.luxury-glass {
+    background: var(--glass-fill);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+@media (forced-colors: active) {
+  .luxury-glass, .site-header.luxury-glass, .mobile-menu.luxury-glass { background: Canvas; border-color: CanvasText; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+@media (prefers-reduced-motion: reduce) { .glass-highlight { transition: none; } }

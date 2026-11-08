@@ -10,7 +10,7 @@ const localPath = currentPath.startsWith(base) ? currentPath.slice(base.length) 
 const isCurrent = (href: string) => href === '/' ? localPath === '/' : localPath.startsWith(href);
 ---
 
-<header class="site-header" data-site-header>
+<header class="site-header luxury-glass" data-site-header>
   <a class="brand" href={withBase('/')} aria-label={`${siteConfig.brandDisplayName} home`}>
     <img src={withBase(siteConfig.logoPath)} alt={siteConfig.brandDisplayName} width="1254" height="1254" />
   </a>
