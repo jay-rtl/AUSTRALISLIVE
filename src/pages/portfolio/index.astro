@@ -5,6 +5,6 @@ import ShowFeature from '../../components/ShowFeature.astro';
 import { previousShow } from '../../data/shows';
 ---
 <BaseLayout title="Previous Shows | Australis Live" description="A look back at Nurse Even's This is BULLSHIFT Australia tour." image={previousShow.image}>
-  <PageHero eyebrow="Previous shows" title="The moments stay with us." intro="A look back at the artists, cities and shared experiences of our previous shows." />
+  <PageHero variant="archive" eyebrow="Previous shows" title="The moments stay with us." intro="A look back at the artists, cities and shared experiences of our previous shows." />
   <div class="show-page"><ShowFeature show={previousShow} past /></div>
 </BaseLayout>

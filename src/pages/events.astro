@@ -5,6 +5,6 @@ import ShowFeature from '../components/ShowFeature.astro';
 import { nextShow } from '../data/shows';
 ---
 <BaseLayout title="Shows & Tickets | Australis Live" description="LAKAS TAMA with Repakol Band. Explore Australia and New Zealand tour dates and official ticket links." image={nextShow.image}>
-  <PageHero eyebrow="On the calendar" title="The next moment starts here." intro="Discover the tour, choose your city, and join us for a night of live music." />
+  <PageHero variant="events" eyebrow="On the calendar" title="The next moment starts here." intro="Discover the tour, choose your city, and join us for a night of live music." />
   <div class="show-page"><ShowFeature show={nextShow} /></div>
 </BaseLayout>

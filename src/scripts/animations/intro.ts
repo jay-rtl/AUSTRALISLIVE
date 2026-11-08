@@ -41,10 +41,11 @@ export function initIntro() {
     timeline
       .fromTo('.intro-accent', { scaleX: 0, autoAlpha: 0 }, { scaleX: 1, autoAlpha: 0.7, duration: 0.5 }, 0.12)
       .fromTo(logo, { autoAlpha: 0, scale: 0.94 }, { autoAlpha: 1, scale: 1, duration: 0.7 }, 0.32)
-      .to('.intro-accent', { autoAlpha: 0, duration: 0.4 }, 1.65)
-      .add('hero', 2.0)
+      .to('.intro-accent', { autoAlpha: 0, duration: 0.3 }, 0.9)
+      .add('hero', 1.2)
       .to(intro, { autoAlpha: 0, duration: 0.8 }, 'hero')
       .to('[data-hero-media]', { clipPath: 'inset(0 0 0 0%)', duration: 0.95 }, 'hero')
+      .fromTo('[data-hero-media] > img', { scale: 1.045 }, { scale: 1, duration: 1.2 }, 'hero')
       .to('.hero-title > span > span', { yPercent: 0, duration: 0.8, stagger: 0.1 }, 'hero+=0.1')
       .to('.hero-eyebrow, .hero-summary, .hero-actions .arrow-link', { y: 0, autoAlpha: 1, duration: 0.5, stagger: 0.1 }, 'hero+=0.25')
       .to('.site-header', { autoAlpha: 1, duration: 0.5 }, 'hero+=0.35')

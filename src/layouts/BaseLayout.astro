@@ -4,7 +4,10 @@ import { withBase } from '../utils/paths';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import SEOHead from '../components/SEOHead.astro';
+import headingFont from '../assets/fonts/manrope-latin.woff2?url';
+import bodyFont from '../assets/fonts/instrument-sans-latin.woff2?url';
 import '../styles/global.css';
+import '../styles/fonts.css';
 import '../styles/editorial.css';
 
 interface Props {
@@ -25,6 +28,8 @@ const { title, description, image, noindex } = Astro.props;
     <meta name="theme-color" content="#080808" />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" href={withBase(siteConfig.logoPath)} type="image/png" />
+    <link rel="preload" href={headingFont} as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href={bodyFont} as="font" type="font/woff2" crossorigin="anonymous" />
     <SEOHead title={title} description={description} image={image} noindex={noindex} />
     <slot name="head" />
   </head>

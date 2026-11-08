@@ -3,11 +3,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import ArrowLink from '../components/ArrowLink.astro';
 import OurTeam from '../components/OurTeam.astro';
+import { withBase } from '../utils/paths';
 import '../styles/shows.css';
 ---
 <BaseLayout title="About & Our Team | Australis Live" description="Meet Arvin and Marc: the friendship, production experience and creative partnership behind AUSTRALIS LIVE.">
   <div class="about-intro">
-    <PageHero eyebrow="AUSTRALIS LIVE" title="For the artists. For the audience." intro="Entertainment and Management - bringing creative ambition and live experiences together." />
+    <PageHero variant="about" eyebrow="AUSTRALIS LIVE" title="For the artists. For the audience." intro="Entertainment and Management - bringing creative ambition and live experiences together.">
+      <div class="about-intro__portraits" aria-hidden="true">
+        <img src={withBase('/images/team/portrait-02-640.webp')} width="1448" height="1086" alt="" decoding="async" />
+        <img src={withBase('/images/team/portrait-01-640.webp')} width="1448" height="1086" alt="" decoding="async" />
+      </div>
+    </PageHero>
   </div>
   <nav class="show-page team-jump" aria-label="About this page"><a href="#our-team">Meet our team ↓</a></nav>
   <section class="show-page editorial-copy">

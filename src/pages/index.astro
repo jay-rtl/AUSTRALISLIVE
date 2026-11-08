@@ -4,6 +4,7 @@ import ArrowLink from '../components/ArrowLink.astro';
 import ShowFeature from '../components/ShowFeature.astro';
 import { nextShow, previousShow } from '../data/shows';
 import SectionHeading from '../components/SectionHeading.astro';
+import ServiceIcon from '../components/ServiceIcon.astro';
 import { siteConfig, homeCopy } from '../config/site';
 import { services } from '../data/services';
 import { withBase } from '../utils/paths';
@@ -11,9 +12,11 @@ import '../styles/home.css';
 
 const isDev = import.meta.env.DEV;
 const media = {
-  hero: withBase(nextShow.image),
+  hero: withBase('/images/atmosphere/australis-concert-hero.webp'),
+  heroMobile: withBase('/images/atmosphere/australis-concert-hero-mobile.webp'),
   material: withBase('/images/atmosphere/material-study.webp'),
 };
+const heroSrcSet = `${media.heroMobile} 960w, ${media.hero} 1672w`;
 ---
 
 <BaseLayout
@@ -23,7 +26,7 @@ const media = {
 >
   <Fragment slot="head">
     <link rel="preload" href={withBase(siteConfig.logoPath)} as="image" type="image/png" />
-    <link rel="preload" href={media.hero} as="image" type="image/webp" fetchpriority="high" />
+    <link rel="preload" href={media.hero} as="image" type="image/webp" imagesrcset={heroSrcSet} imagesizes="100vw" fetchpriority="high" />
     <script is:inline define:vars={{ isDev }}>
       try {
         if (isDev && new URLSearchParams(location.search).get('replay-intro') === '1') {
@@ -56,9 +59,11 @@ const media = {
       <div class="cinematic-hero__media" data-hero-media>
         <img
           src={media.hero}
-          alt={nextShow.imageAlt}
-          width={nextShow.imageWidth}
-          height={nextShow.imageHeight}
+          srcset={heroSrcSet}
+          sizes="100vw"
+          alt=""
+          width="1672"
+          height="941"
           fetchpriority="high"
           decoding="async"
         />
@@ -68,7 +73,7 @@ const media = {
       <div class="cinematic-hero__copy">
         <p class="eyebrow hero-eyebrow">{homeCopy.eyebrow}</p>
         <h1 id="hero-title" class="hero-title">
-          {homeCopy.headline.map((line) => <span><span>{line}</span></span>)}
+          {homeCopy.headline.map((line) => <span><span>{line.includes('inspire') ? <>that <em>inspire</em> people.</> : line}</span></span>)}
         </h1>
         <p class="hero-summary">
           {homeCopy.summary}
@@ -93,6 +98,8 @@ const media = {
 
 
 
+    <section class="show-section" aria-label="Next show"><ShowFeature show={nextShow} /></section>
+
     <section class="brand-statement" id="statement">
       <div class="brand-statement__meta" data-reveal>
         <span>00</span>
@@ -109,7 +116,7 @@ const media = {
       </div>
     </section>
 
-    <section class="show-section" aria-label="Next show"><ShowFeature show={nextShow} /></section>
+
 
     <section class="home-services" aria-labelledby="services-title">
       <SectionHeading number="01" label="Selected Services" title="Disciplines in service of one clear idea." titleId="services-title" />
@@ -118,8 +125,10 @@ const media = {
           {services.map((service, index) => (
             <a class="service-row" href={withBase('/services/')} data-service-row data-index={index}>
               <span class="service-row__number">{String(index + 1).padStart(2, '0')}</span>
+              <ServiceIcon index={index} />
               <span class="service-row__title">{service.title}</span>
               <span class="service-row__description">Entertainment & production</span>
+              <span class="service-row__summary">{service.description}</span>
               <svg viewBox="0 0 32 16" aria-hidden="true"><path d="M1 8h27M21 1l7 7-7 7" /></svg>
             </a>
           ))}

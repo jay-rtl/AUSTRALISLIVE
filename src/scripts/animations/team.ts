@@ -8,7 +8,7 @@ export function initTeamMotion() {
   media.add('(prefers-reduced-motion: no-preference)', () => {
     const context = gsap.context(() => {
       root.querySelectorAll('[data-team-reveal]').forEach((section) => {
-        gsap.from(section.children, { y: 16, duration: .75, stagger: .06, ease: 'power2.out',
+        gsap.from(section.querySelectorAll('.eyebrow, h2, h3'), { y: 16, duration: .75, stagger: .08, ease: 'power2.out',
           scrollTrigger: { trigger: section, start: 'top 90%', once: true } });
       });
       root.querySelectorAll('[data-team-portrait]').forEach((portrait) => {

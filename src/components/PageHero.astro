@@ -3,13 +3,15 @@ interface Props {
   eyebrow: string;
   title: string;
   intro: string;
+  variant?: 'about' | 'services' | 'events' | 'archive' | 'contact' | 'default';
 }
 
-const { eyebrow, title, intro } = Astro.props;
+const { eyebrow, title, intro, variant = 'default' } = Astro.props;
 ---
 
-<section class="page-hero">
+<section class:list={['page-hero', `page-hero--${variant}`]}>
   <p class="eyebrow">{eyebrow}</p>
   <h1>{title}</h1>
   <p class="page-intro">{intro}</p>
+  <slot />
 </section>
